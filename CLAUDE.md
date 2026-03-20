@@ -22,6 +22,20 @@
 
 ---
 
+## 🆕 새 프로젝트 시작 전 체크
+
+새 프로젝트 레포를 만들면 **루트에 CLAUDE.md를 먼저 만들고** 아래 3줄 붙여넣기:
+
+```md
+# CLAUDE.md
+세션 시작 전 D:\2027_Git\gabi_plan_control\CLAUDE.md 읽을 것
+work_log는 D:\2027_Git\gabi_plan_control\work_log.md에 기록할 것
+```
+
+이것만 있으면 어느 프로젝트에서 작업해도 work_log가 한 곳에 쌓임.
+
+---
+
 ## 📁 핵심 파일 위치
 
 | 파일 | 역할 |
