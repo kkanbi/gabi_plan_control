@@ -44,8 +44,8 @@ VAULT_PATH = Path(os.environ.get(
 # 일지 저장 폴더
 JOURNAL_DIR = VAULT_PATH / "60_Journal"
 
-# 마스터 플랜 HTML 경로
-MASTER_PLAN_PATH = VAULT_PATH / "50_Strategy" / "2026_ProjectTimeline.html"
+# 마스터 플랜 경로 (Mermaid Gantt + Dataview 프론트매터)
+MASTER_PLAN_PATH = VAULT_PATH / "50_Strategy" / "2026_ProjectTimeline.md"
 
 KST = timezone(timedelta(hours=9))
 

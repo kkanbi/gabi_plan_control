@@ -1,4 +1,8 @@
 [
   "calendar",
-  "obsidian-git"
+  "obsidian-git",
+  "dataview",
+  "advanced-tables",
+  "obsidian-paste-image-rename",
+  "templater-obsidian"
 ]
