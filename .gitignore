@@ -1,0 +1,18 @@
+# === Gabi Brain .gitignore ===
+
+# PAT 토큰이 포함된 실행 파일
+_system/scripts/run_worklog.bat
+
+# 로그 파일
+_system/scripts/*.log
+
+# 옵시디언 워크스페이스 캐시 (기기마다 다름)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# OS 시스템 파일
+Thumbs.db
+.DS_Store
+desktop.ini
+gabi_brain/_system/scripts/run_worklog.bat
+gabi_brain/_system/scripts/run_worklog.bat
