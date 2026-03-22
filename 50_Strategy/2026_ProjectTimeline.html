@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///C:/Users/cgb22/Downloads/2026_ProjectTimeline_1.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 타임라인 (2025-2027)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .header { margin-bottom: 30px; }
+        .header h1 { font-size: 28px; color: #1f2937; margin-bottom: 8px; }
+        .header p { color: #6b7280; font-size: 14px; }
+
+        .version-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            color: #6b7280;
+        }
+        .tab:hover { background: #f3f4f6; }
+        .tab.active {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* 간트차트 */
+        .gantt-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .gantt-header {
+            display: flex;
+            margin-bottom: 20px;
+            min-width: 1300px;
+        }
+
+        .gantt-label {
+            width: 180px;
+            flex-shrink: 0;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .gantt-timeline {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 3px;
+        }
+
+        .month-label {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 6px 2px;
+            line-height: 1.3;
+        }
+
+        .month-label.phase-rest { background: #fef3c7; border-radius: 4px; color: #92400e; }
+        .month-label.phase-recovery { background: #d1fae5; border-radius: 4px; color: #065f46; }
+        .month-label.phase-main { background: #ede9fe; border-radius: 4px; color: #5b21b6; }
+        .month-label.phase-focus { background: #dbeafe; border-radius: 4px; color: #1e40af; }
+        .month-label.phase-launch { background: #dcfce7; border-radius: 4px; color: #166534; }
+        .month-label.phase-post { background: #fce7f3; border-radius: 4px; color: #9d174d; }
+
+        .gantt-row {
+            display: flex;
+            margin-bottom: 12px;
+            min-width: 1300px;
+        }
+
+        .project-name {
+            width: 180px;
+            flex-shrink: 0;
+            padding: 10px 12px;
+            font-weight: 600;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .project-name .sub-badge {
+            font-size: 10px;
+            background: #f3f4f6;
+            color: #9ca3af;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+
+        .gantt-bars {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 3px;
+            align-items: center;
+        }
+
+        .gantt-bar {
+            height: 36px;
+            border-radius: 6px;
+            padding: 4px 6px;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .gantt-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .bar-rest     { background: #f59e0b; }
+        .bar-learning { background: #3b82f6; }
+        .bar-dev      { background: #8b5cf6; }
+        .bar-launch   { background: #10b981; }
+        .bar-revenue  { background: #059669; }
+        .bar-passive  { background: #9ca3af; }
+        .bar-sub      { background: #f97316; opacity: 0.75; }
+        .bar-portfolio{ background: #ec4899; }
+        .bar-commission{ background: #dc2626; }
+
+        .gantt-empty { height: 36px; }
+
+        /* 페이즈 구분선 */
+        .phase-divider {
+            min-width: 1300px;
+            display: flex;
+            margin-bottom: 8px;
+        }
+        .phase-divider-label {
+            width: 180px;
+            flex-shrink: 0;
+        }
+        .phase-divider-bars {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 3px;
+        }
+        .phase-block {
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+        }
+        .pb-rest    { background: #f59e0b; }
+        .pb-recovery{ background: #10b981; }
+        .pb-main    { background: #8b5cf6; }
+        .pb-focus   { background: #3b82f6; }
+        .pb-pre     { background: #ec4899; }
+        .pb-post    { background: #059669; }
+
+        /* 수익 행 */
+        .revenue-row {
+            min-width: 1300px;
+            display: flex;
+            margin-bottom: 4px;
+        }
+        .revenue-label {
+            width: 180px;
+            flex-shrink: 0;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+        .revenue-cells {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 3px;
+        }
+        .rev-cell {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 8px 2px;
+            border-radius: 4px;
+        }
+        .rev-0  { color: #d1d5db; }
+        .rev-low  { color: #3b82f6; background: #eff6ff; }
+        .rev-mid  { color: #8b5cf6; background: #f5f3ff; }
+        .rev-high { color: #059669; background: #ecfdf5; }
+        .rev-target { color: white; background: #059669; font-weight: 700; }
+
+        .hidden { display: none; }
+
+        /* 요약 카드 */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-period {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .summary-period h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .period-phase-label {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 12px;
+            margin-top: 4px;
+        }
+
+        .project-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid #e5e7eb;
+        }
+        .project-card.main-card { border-left-color: #8b5cf6; }
+        .project-card.sub-card  { border-left-color: #f97316; opacity: 0.9; }
+        .project-card.skip-card { border-left-color: #e5e7eb; opacity: 0.5; }
+
+        .project-icon { font-size: 22px; padding-top: 2px; }
+
+        .project-info { flex: 1; }
+        .project-card-name { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 2px; }
+        .project-status { font-size: 11px; font-weight: 500; color: #6b7280; margin-bottom: 4px; }
+        .project-detail { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+
+        .revenue-highlight {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #059669;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 4px;
+        }
+
+        .total-revenue-bar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #374151; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+        @media (max-width: 768px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>프로젝트 타임라인 (2025-2027)</h1>
+            <p>복직까지 2년, 월 185만원 부수입 목표</p>
+            <div class="version-badge">v3.1 — 출산 현실 반영 + 4월 본격 시작</div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab(&#39;gantt&#39;)">📊 간트차트</button>
+            <button class="tab" onclick="showTab(&#39;summary&#39;)">📋 전체 요약</button>
+        </div>
+
+        <!-- 범례 -->
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>휴식/출산</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>회복기</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div>학습</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;"></div>개발</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>출시</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#059669;"></div>수익</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ec4899;"></div>포트폴리오</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#dc2626;"></div>외주</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#f97316; opacity:0.75;"></div>서브 프로젝트</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#9ca3af;"></div>방치(수동소득)</div>
+        </div>
+
+        <!-- 간트차트 -->
+        <div id="gantt-view" class="gantt-container">
+
+            <!-- 페이즈 구분 행 -->
+            <div class="phase-divider">
+                <div class="phase-divider-label" style="font-size:11px; font-weight:700; color:#6b7280; padding:4px 12px;">페이즈</div>
+                <div class="phase-divider-bars">
+                    <!-- 1~3: 휴식 (12월~2월) -->
+                    <div class="phase-block pb-rest" style="grid-column: 1 / 4;">😴 Phase1 휴식</div>
+                    <!-- 4: 회복 (3월) -->
+                    <div class="phase-block pb-recovery" style="grid-column: 4 / 5;">🌱 P2</div>
+                    <!-- 5~10: 본격시작 (4~9월) -->
+                    <div class="phase-block pb-main" style="grid-column: 5 / 11;">🔥 Phase3 본격 시작</div>
+                    <!-- 11~15: 버튜버 집중 (10월~2027.2) -->
+                    <div class="phase-block pb-focus" style="grid-column: 11 / 16;">🎨 Phase4 버튜버 집중</div>
+                    <!-- 16~17: 외주 시작 (3~6월) -->
+                    <div class="phase-block pb-pre" style="grid-column: 16 / 18;">💼 P5 외주</div>
+                    <!-- 18: 복직 -->
+                    <div class="phase-block pb-post" style="grid-column: 18;">🎉복직</div>
+                </div>
+            </div>
+
+            <!-- 월 헤더 -->
+            <div class="gantt-header">
+                <div class="gantt-label">프로젝트</div>
+                <div class="gantt-timeline">
+                    <div class="month-label phase-rest">12월<br>2025</div>
+                    <div class="month-label phase-rest">1월<br>2026</div>
+                    <div class="month-label phase-rest">2월<br>2026</div>
+                    <div class="month-label phase-recovery">3월<br>2026</div>
+                    <div class="month-label phase-main">4월<br>2026</div>
+                    <div class="month-label phase-main">5월<br>2026</div>
+                    <div class="month-label phase-main">6월<br>2026</div>
+                    <div class="month-label phase-main">7월<br>2026</div>
+                    <div class="month-label phase-main">8월<br>2026</div>
+                    <div class="month-label phase-main">9월<br>2026</div>
+                    <div class="month-label phase-focus">10월<br>2026</div>
+                    <div class="month-label phase-focus">11월<br>2026</div>
+                    <div class="month-label phase-focus">12월<br>2026</div>
+                    <div class="month-label phase-focus">1월<br>2027</div>
+                    <div class="month-label phase-focus">2월<br>2027</div>
+                    <div class="month-label phase-launch">3월<br>2027</div>
+                    <div class="month-label phase-launch">4~6월<br>2027</div>
+                    <div class="month-label phase-post">복직후<br>2027.7+</div>
+                </div>
+            </div>
+
+            <!-- 뽀모도로 앱 -->
+            <div class="gantt-row">
+                <div class="project-name">📱 뽀모도로 앱</div>
+                <div class="gantt-bars">
+                    <!-- 1~3: 휴식 -->
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 4: 회복기 재개 -->
+                    <div class="gantt-bar bar-dev">재개</div>
+                    <!-- 5~8: 개발 (4~7월) -->
+                    <div class="gantt-bar bar-dev" style="grid-column: 5/9;">개발 (4~7월)</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 9: 출시 (8월) -->
+                    <div class="gantt-bar bar-launch">출시<br>8월</div>
+                    <!-- 10~18: 수익 -->
+                    <div class="gantt-bar bar-revenue" style="grid-column: 10/19;">수익 (방치 모드)</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                </div>
+            </div>
+
+            <!-- 타임블록 앱 -->
+            <div class="gantt-row">
+                <div class="project-name">📱 타임블록 앱</div>
+                <div class="gantt-bars">
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 11~14: 개발 (10월~1월) -->
+                    <div class="gantt-bar bar-dev" style="grid-column: 11/15;">개발 (10월~1월)</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 15: 출시 (2월) -->
+                    <div class="gantt-bar bar-launch">출시</div>
+                    <!-- 16~18: 수익 -->
+                    <div class="gantt-bar bar-revenue" style="grid-column: 16/19;">수익</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                </div>
+            </div>
+
+            <!-- 버튜버 외주 -->
+            <div class="gantt-row">
+                <div class="project-name">🎨 버튜버 외주</div>
+                <div class="gantt-bars">
+                    <!-- 1~3: 휴식 -->
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 5~10: 블렌더 학습 (4~9월) -->
+                    <div class="gantt-bar bar-learning" style="grid-column: 5/11;">블렌더 학습 (4~9월)</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 11~14: 유니티+리깅 (10월~1월) -->
+                    <div class="gantt-bar bar-learning" style="grid-column: 11/15;">유니티+리깅</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 15~16: 포트폴리오 (2~3월) -->
+                    <div class="gantt-bar bar-portfolio" style="grid-column: 15/17;">포트폴리오</div>
+                    <div class="gantt-empty"></div>
+                    <!-- 17: 첫 외주 (4~6월) -->
+                    <div class="gantt-bar bar-commission">첫외주</div>
+                    <!-- 18: 복직 후 유지 -->
+                    <div class="gantt-bar bar-revenue">월 2건</div>
+                </div>
+            </div>
+
+            <!-- 웹소설 (서브) -->
+            <div class="gantt-row">
+                <div class="project-name">📝 웹소설 <span class="sub-badge">서브</span></div>
+                <div class="gantt-bars">
+                    <!-- 1~3: 휴식 -->
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 4~17: 출퇴근 시간 틈틈이 집필 -->
+                    <div class="gantt-bar bar-sub" style="grid-column: 4/18;">출퇴근 시간 틈틈이 집필</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 18: 복직 후 2작 -->
+                    <div class="gantt-bar bar-sub">2작</div>
+                </div>
+            </div>
+
+            <!-- 스톡이미지 (서브) -->
+            <div class="gantt-row">
+                <div class="project-name">🖼️ 스톡이미지 <span class="sub-badge">서브</span></div>
+                <div class="gantt-bars">
+                    <!-- 1~8: 없음 -->
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 9~17: 버튜버 부산물 업로드 (8월~) -->
+                    <div class="gantt-bar bar-sub" style="grid-column: 9/18;">버튜버 부산물 업로드 (목표 600장)</div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <div class="gantt-empty"></div>
+                    <!-- 18: 방치 수동소득 -->
+                    <div class="gantt-bar bar-passive">수동소득</div>
+                </div>
+            </div>
+
+            <!-- 수익 섹션 -->
+            <div style="margin-top: 32px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+                <h3 style="font-size:15px; font-weight:700; color:#1f2937; margin-bottom:16px;">💰 월별 예상 수익</h3>
+
+                <div class="revenue-row">
+                    <div class="revenue-label">📱 앱</div>
+                    <div class="revenue-cells">
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-mid">30만</div>
+                        <div class="rev-cell rev-mid">40만</div>
+                        <div class="rev-cell rev-mid">45만</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">55만</div>
+                        <div class="rev-cell rev-high">60만</div>
+                    </div>
+                </div>
+
+                <div class="revenue-row">
+                    <div class="revenue-label">🎨 버튜버</div>
+                    <div class="revenue-cells">
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-mid">50만</div>
+                        <div class="rev-cell rev-mid">80만</div>
+                        <div class="rev-cell rev-high">120만</div>
+                    </div>
+                </div>
+
+                <div class="revenue-row">
+                    <div class="revenue-label">🖼️ 기타</div>
+                    <div class="revenue-cells">
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">-</div>
+                        <div class="rev-cell rev-0">~1만</div>
+                        <div class="rev-cell rev-low">3만</div>
+                        <div class="rev-cell rev-low">3만</div>
+                        <div class="rev-cell rev-low">4만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                        <div class="rev-cell rev-low">5만</div>
+                    </div>
+                </div>
+
+                <div class="revenue-row" style="background:#f9fafb; border-radius:8px; padding:4px 0;">
+                    <div class="revenue-label" style="font-weight:700; color:#1f2937;">💰 합계</div>
+                    <div class="revenue-cells">
+                        <div class="rev-cell rev-0">0원</div>
+                        <div class="rev-cell rev-0">0원</div>
+                        <div class="rev-cell rev-0">0원</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-low">~10만</div>
+                        <div class="rev-cell rev-mid">30만</div>
+                        <div class="rev-cell rev-mid">43만</div>
+                        <div class="rev-cell rev-mid">48만</div>
+                        <div class="rev-cell rev-mid">54만</div>
+                        <div class="rev-cell rev-mid">55만</div>
+                        <div class="rev-cell rev-mid">55만</div>
+                        <div class="rev-cell rev-mid">55만</div>
+                        <div class="rev-cell rev-high">105만</div>
+                        <div class="rev-cell rev-high">140만</div>
+                        <div class="rev-cell rev-target">185만</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 전체 요약 -->
+        <div id="summary-view" class="hidden">
+            <div class="summary-grid">
+
+                <!-- Phase 1: 출산 직후 -->
+                <div class="summary-period">
+                    <h3>😴 2025.12 ~ 2026.2</h3>
+                    <div class="period-phase-label" style="background:#fef3c7; color:#92400e;">Phase 1 — 출산 직후 (휴식)</div>
+                    <div class="project-card skip-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">뽀모도로 앱</div>
+                            <div class="project-status">❌ 하지 않음</div>
+                            <div class="project-detail">이 기간은 아무것도 안 함. 죄책감 금지.</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">인스타 만화 (@kkanbi)</div>
+                            <div class="project-status">월 2회만</div>
+                            <div class="project-detail">미리 그려둔 것 활용. 신규 제작 없음.</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar"><span>월 예상 수익</span><span>0원</span></div>
+                </div>
+
+                <!-- Phase 2: 회복기 -->
+                <div class="summary-period">
+                    <h3>🌱 2026년 3월</h3>
+                    <div class="period-phase-label" style="background:#d1fae5; color:#065f46;">Phase 2 — 회복기 (징검다리)</div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">뽀모도로 앱</div>
+                            <div class="project-status">개발 재개</div>
+                            <div class="project-detail">하루 1~2시간, 아기 낮잠 시간 활용.<br>중단됐던 개발 이어하기.</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">인스타 만화</div>
+                            <div class="project-status">월 2회 유지</div>
+                            <div class="project-detail">쓰레드 가끔 (선택). 무리 금지.</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar"><span>월 예상 수익</span><span>~10만원</span></div>
+                </div>
+
+                <!-- Phase 3: 본격 시작 -->
+                <div class="summary-period">
+                    <h3>🔥 2026년 4월 ~ 9월</h3>
+                    <div class="period-phase-label" style="background:#ede9fe; color:#5b21b6;">Phase 3 — 본격 시작 (하루 5~6시간)</div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">뽀모도로 앱</div>
+                            <div class="project-status">개발 → 8월 출시 목표</div>
+                            <div class="project-detail">하루 3시간. 4~7월 개발 완성.<br>8월 앱스토어/플레이스토어 출시.</div>
+                            <div class="revenue-highlight">출시 후 월 30만원~</div>
+                        </div>
+                    </div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">버튜버 — 블렌더 학습</div>
+                            <div class="project-status">학습 시작 (4월~)</div>
+                            <div class="project-detail">하루 2시간. 블렌더 기초 + 캐릭터 1~2개 완성.<br>기존 3ds Max 리깅 경험 활용.</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">🖼️</span>
+                        <div class="project-info">
+                            <div class="project-card-name">스톡이미지</div>
+                            <div class="project-status">블렌더 부산물 업로드 시작</div>
+                            <div class="project-detail">버튜버 작업 부산물만 활용. 별도 시간 투자 없음.</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">📝</span>
+                        <div class="project-info">
+                            <div class="project-card-name">웹소설</div>
+                            <div class="project-status">틈틈이 집필 (선택)</div>
+                            <div class="project-detail">여유 있을 때만. 출퇴근 시간 활용.</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar"><span>월 예상 수익 (9월)</span><span>43만원</span></div>
+                </div>
+
+                <!-- Phase 4: 버튜버 집중 -->
+                <div class="summary-period">
+                    <h3>🎨 2026.10 ~ 2027.2</h3>
+                    <div class="period-phase-label" style="background:#dbeafe; color:#1e40af;">Phase 4 — 버튜버 집중 (하루 5~6시간)</div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">버튜버 — 유니티+리깅</div>
+                            <div class="project-status">본격 학습 (하루 3시간)</div>
+                            <div class="project-detail">유니티 연동 + 리깅 + 립싱크.<br>캐릭터 3개 완성 목표.<br>VRM 익스포트 마스터.</div>
+                        </div>
+                    </div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">앱 (뽀모도로 + 타임블록)</div>
+                            <div class="project-status">유지보수 + 타임블록 개발</div>
+                            <div class="project-detail">뽀모도로 유지보수 + 10월부터 타임블록 개발.<br>타임블록 2027.2월 출시 목표.</div>
+                            <div class="revenue-highlight">월 45~55만원</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">🖼️</span>
+                        <div class="project-info">
+                            <div class="project-card-name">스톡이미지</div>
+                            <div class="project-status">버산물 본격 업로드</div>
+                            <div class="project-detail">버튜버 작업 부산물 활용 누적 중.<br>월 3~5만원 수동소득 시작.</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar"><span>월 예상 수익 (2월)</span><span>55만원</span></div>
+                </div>
+
+                <!-- Phase 5: 외주 시작 -->
+                <div class="summary-period">
+                    <h3>💼 2027년 3월 ~ 6월</h3>
+                    <div class="period-phase-label" style="background:#fce7f3; color:#9d174d;">Phase 5 — 버튜버 외주 시작</div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">버튜버 외주</div>
+                            <div class="project-status">✅ 첫 외주 수주 (월 1건)</div>
+                            <div class="project-detail">Booth / Kmong / Upwork 등록.<br>템플릿 시스템 구축 → 작업시간 50% 단축.<br>기본 캐릭터 50만원 / 풀셋 80만원.</div>
+                            <div class="revenue-highlight">월 50만원~</div>
+                        </div>
+                    </div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">앱 유지보수</div>
+                            <div class="project-status">방치 모드</div>
+                            <div class="project-detail">뽀모도로 + 타임블록 자동화 유지.<br>최소 시간 투입.</div>
+                            <div class="revenue-highlight">월 55만원</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar"><span>월 예상 수익</span><span>105~120만원</span></div>
+                </div>
+
+                <!-- Phase 6: 복직 후 -->
+                <div class="summary-period">
+                    <h3>🎉 2027년 7월~ (복직)</h3>
+                    <div class="period-phase-label" style="background:#dcfce7; color:#166534;">Phase 6 — 복직 후 (주 14시간)</div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">🎨</span>
+                        <div class="project-info">
+                            <div class="project-card-name">버튜버 외주</div>
+                            <div class="project-status">월 2건 안정화</div>
+                            <div class="project-detail">주 10시간. 템플릿화로 효율 극대화.<br>기본 캐릭터 50만원 × 월 2~3건.</div>
+                            <div class="revenue-highlight">월 120만원</div>
+                        </div>
+                    </div>
+                    <div class="project-card main-card">
+                        <span class="project-icon">📱</span>
+                        <div class="project-info">
+                            <div class="project-card-name">앱 유지보수</div>
+                            <div class="project-status">완전 방치 모드</div>
+                            <div class="project-detail">주 4시간. 뽀모도로 + 타임블록 수동소득.</div>
+                            <div class="revenue-highlight">월 60만원</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">📝</span>
+                        <div class="project-info">
+                            <div class="project-card-name">웹소설</div>
+                            <div class="project-status">2작 집필 (출퇴근 시간)</div>
+                            <div class="project-detail">해도 되고 안 해도 됨. 부담 없이.</div>
+                        </div>
+                    </div>
+                    <div class="project-card sub-card">
+                        <span class="project-icon">🖼️</span>
+                        <div class="project-info">
+                            <div class="project-card-name">스톡이미지</div>
+                            <div class="project-status">수동소득 600장 달성</div>
+                            <div class="project-detail">더 이상 제작 없음. 600장 누적 수동소득.</div>
+                            <div class="revenue-highlight">월 5만원</div>
+                        </div>
+                    </div>
+                    <div class="total-revenue-bar" style="background:linear-gradient(135deg,#059669,#065f46);">
+                        <span>🎯 월 총 수익 (목표 달성)</span>
+                        <span style="font-size:18px;">185만원</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.getElementById('gantt-view').classList.add('hidden');
+            document.getElementById('summary-view').classList.add('hidden');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabName + '-view').classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+    </script>
+
+
+</body></html>

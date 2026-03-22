@@ -183,9 +183,21 @@
       "daily-notes:오늘의 일일 노트 열기": false,
       "templates:템플릿 삽입": false,
       "command-palette:명령어 팔레트 열기": false,
-      "bases:새 베이스 생성하기": false
+      "bases:새 베이스 생성하기": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "faf0c4dc54947aa6",
-  "lastOpenFiles": []
+  "active": "38ae9396a0ae5a9a",
+  "lastOpenFiles": [
+    "gabi_brain_setup.zip",
+    "migrate.bat",
+    "50_Strategy/2026_ProjectTimeline.html",
+    "50_Strategy/2026_Goal.html",
+    "50_Strategy/Game_project-launch-schedule_Template.html",
+    "50_Strategy/App_Project_Launch_Schedule_Template.html",
+    "App_Project_Launch_Schedule_Template.html",
+    "2026_ProjectTimeline.html",
+    "2026_Goal.html",
+    "Game_project-launch-schedule_Template.html"
+  ]
 }

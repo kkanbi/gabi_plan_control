@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Life Architecture Dashboard</title>
+    <style>
+        :root {
+            --primary: #339af0;
+            --secondary: #51cf66;
+            --accent: #fcc419;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #343a40;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: var(--bg); color: var(--text);
+            line-height: 1.6; margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .container { max-width: 1000px; width: 100%; }
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { margin-bottom: 5px; color: #1864ab; font-size: 2.2rem; }
+        
+        section { margin-bottom: 40px; width: 100%; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h2 { border-left: 6px solid var(--primary); padding-left: 15px; margin-bottom: 25px; color: #495057; font-size: 1.4rem; }
+
+        .editable { outline: none; white-space: pre-wrap; }
+
+        /* 1. 정체성 & 설계도 섹션 */
+        .identity-section { background: linear-gradient(135deg, #e7f5ff 0%, #ffffff 100%); border-left: 8px solid var(--primary); }
+        .blueprint-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .bp-card { background: rgba(255,255,255,0.8); padding: 15px; border-radius: 12px; border: 1px solid #dbeafe; }
+        .bp-title { font-weight: bold; font-size: 0.85rem; color: var(--primary); display: block; margin-bottom: 5px; }
+        .bp-content { font-size: 0.9rem; line-height: 1.5; }
+
+        /* 2. 비전 맵 (Mandalart) */
+        .manda-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .manda-cell { background: var(--bg); padding: 18px; border-radius: 15px; border: 1px solid #e9ecef; }
+        .manda-cell.core { background: linear-gradient(135deg, var(--primary), #228be6); color: white; text-align: center; justify-content: center; display: flex; flex-direction: column; border: none; }
+        .manda-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: #868e96; border-bottom: 1px solid #dee2e6; padding-bottom: 3px; }
+        .manda-cell.core .manda-title { color: #e7f5ff; border-bottom-color: rgba(255,255,255,0.3); }
+
+        /* 3. 분기 로드맵 (체크리스트) */
+        .quarter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .quarter-card { background: #fcfdf0; padding: 20px; border-radius: 15px; border-top: 5px solid var(--secondary); position: relative; }
+        .quarter-name { font-weight: 800; color: #2f9e44; margin-bottom: 10px; display: inline-block; }
+        .checklist-item { display: flex; align-items: center; background: white; padding: 8px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 6px; }
+        .checklist-item input { margin-right: 10px; accent-color: var(--secondary); cursor: pointer; }
+        .checklist-text { flex-grow: 1; font-size: 0.9rem; outline: none; }
+
+        /* 4. 월간 성과 (성과 기록형 복구) */
+        .monthly-card { border-top-color: var(--accent); background: #fffcf0; }
+        .monthly-card .quarter-name { color: #e67700; }
+        .result-item { display: flex; align-items: flex-start; background: white; padding: 8px 12px; border-radius: 8px; border: 1px solid #ffec99; margin-bottom: 6px; }
+        .bullet { color: var(--accent); margin-right: 8px; font-weight: bold; }
+        .result-text { flex-grow: 1; font-size: 0.9rem; outline: none; }
+
+        /* 공통 버튼 */
+        .delete-btn { background: none; border: none; color: #ff8787; cursor: pointer; margin-left: 5px; font-weight: bold; }
+        .add-btn { width: 100%; padding: 6px; background: #e9ecef; border: 1px dashed #adb5bd; border-radius: 8px; color: #495057; cursor: pointer; font-size: 0.85rem; margin-top: 5px; }
+        .add-month-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+        /* 5. 시스템 */
+        .system-container { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .system-box { background: #f1f3f5; padding: 20px; border-radius: 15px; }
+        .system-box h3 { font-size: 1.1rem; margin-top: 0; color: #1c7ed6; border-bottom: 2px solid #d0ebff; padding-bottom: 8px; }
+        .system-item { background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 5px solid var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
+        .system-item.weekly { border-left-color: var(--accent); }
+        .system-item-title { font-weight: 800; font-size: 1rem; display: block; margin-bottom: 5px; color: #333; }
+
+        .save-bar { position: fixed; bottom: 30px; right: 30px; z-index: 100; }
+        .save-btn { padding: 18px 35px; background: linear-gradient(45deg, var(--primary), #228be6); color: white; border: none; border-radius: 50px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 25px rgba(51, 154, 240, 0.4); }
+        
+        @media (max-width: 768px) { .grid-3, .blueprint-grid, .quarter-grid, .system-container, .manda-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>2026 Life Architecture</h1>
+        <p>1인 기업가이자 기술 전문가, 조가비의 관제탑</p>
+    </header>
+
+    <section class="identity-section">
+        <h2>1. 나의 정체성 & 마인드셋 (Identity)</h2>
+        <div class="editable" contenteditable="true" id="id-mindset" style="font-style: italic; font-size: 1.1rem; color: #1c7ed6; padding: 10px;">
+"나는 이미 증명된 15년 차 전문가다. 완벽이 아닌 완성의 힘을 믿으며, 과정 자체를 즐긴다. 죄책감 없이 쉬고, 타인의 시선에서 자유로운 창작자의 삶을 산다. 시간을 들인 성공은 이미 보장되어 있다."
+        </div>
+    </section>
+
+    <section>
+        <h2>2. 라이프 설계도 (Blueprint)</h2>
+        <div class="blueprint-grid">
+            <div class="bp-card">
+                <span class="bp-title">💡 최종 비전</span>
+                <div class="bp-content editable" contenteditable="true" id="bp-vision">스타트업 CEO 겸 TA&#10;뷰가 좋은 건물 소유&#10;3개국어 능통 작업자</div>
+            </div>
+            <div class="bp-card">
+                <span class="bp-title">💰 재정 목표</span>
+                <div class="bp-content editable" contenteditable="true" id="bp-wealth">월 1,000만 원 소득&#10;순자산 10억 달성&#10;시급 4~5만 원 가치</div>
+            </div>
+            <div class="bp-card">
+                <span class="bp-title">🌿 건강 & 루틴</span>
+                <div class="bp-content editable" contenteditable="true" id="bp-health">11PM 잠 - 6AM 기상&#10;주 3회 운동 (근력)&#10;탄탄한 근육질 몸매</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. 2026 비전 맵 (Vision Map)</h2>
+        <div class="manda-grid">
+            <div class="manda-cell"><span class="manda-title">건강/체력</span><div class="editable" contenteditable="true" id="m1">● 필라테스→PT&#10;● 체지방 20% 달성&#10;● 피부과 관리</div></div>
+            <div class="manda-cell"><span class="manda-title">커리어/TA</span><div class="editable" contenteditable="true" id="m2">● 앱 정식 출시&#10;● 버튜버 풀세팅&#10;● TA 실무 심화</div></div>
+            <div class="manda-cell"><span class="manda-title">재정/자산</span><div class="editable" contenteditable="true" id="m3">● 배당금 20만원&#10;● 부업 소득 창출</div></div>
+            <div class="manda-cell"><span class="manda-title">자기계발</span><div class="editable" contenteditable="true" id="m4">● 웹소설 2편 완성&#10;● 연간 독서 100권&#10;● 3개국어 공부</div></div>
+            <div class="manda-cell core"><span class="manda-title">2026 CORE</span><div class="editable" contenteditable="true" id="mc" style="font-weight:bold;">창작하는 엄마 &&#10;기술 전문가</div></div>
+            <div class="manda-cell"><span class="manda-title">관계/소통</span><div class="editable" contenteditable="true" id="m5">● SNS 툰 주 2회&#10;● 가족과 행복한 시간</div></div>
+            <div class="manda-cell"><span class="manda-title">정신/심리</span><div class="editable" contenteditable="true" id="m6">● 아침 에세이 쓰기&#10;● 감정 일기 기록</div></div>
+            <div class="manda-cell"><span class="manda-title">환경/공간</span><div class="editable" contenteditable="true" id="m7">● 육아 환경 최적화&#10;● 미니멀리즘 유지</div></div>
+            <div class="manda-cell" style="background:#fff9db;"><span class="manda-title" style="color:#e67700;">보상 (Reward)</span><div class="editable" contenteditable="true" id="m8">● 새 키보드/컴퓨터&#10;● 나를 위한 드라이브</div></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. 실행 시스템 (Success Systems)</h2>
+        <div class="system-container">
+            <div class="system-box">
+                <h3>☀️ 데일리 시스템 (Daily)</h3>
+                <div class="system-item"><span class="system-item-title">창작</span><div class="editable" contenteditable="true" id="sd1">새벽 시간 창작 (에세이/스케치)</div></div>
+                <div class="system-item"><span class="system-item-title">기술</span><div class="editable" contenteditable="true" id="sd2">낮잠시간 20분 AI 협업 코딩/공부</div></div>
+                <div class="system-item"><span class="system-item-title">건강</span><div class="editable" contenteditable="true" id="sd3">유모차 산책 30분 or 운동가기</div></div>
+            </div>
+            <div class="system-box">
+                <h3>🗓️ 주간 시스템 (Weekly)</h3>
+                <div class="system-item weekly"><span class="system-item-title">자산</span><div class="editable" contenteditable="true" id="sw1">월요일 오전 포트폴리오/배당금 점검</div></div>
+                <div class="system-item weekly"><span class="system-item-title">창작</span><div class="editable" contenteditable="true" id="sw2">주말 SNS 기록 업로드 및 주간 작업 백업</div></div>
+                <div class="system-item weekly"><span class="system-item-title">리뷰</span><div class="editable" contenteditable="true" id="sw3">일요일 밤 대시보드 정리 및 다음 주 설계</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. 분기 로드맵 & 행동 가이드 (Roadmap)</h2>
+        <div class="quarter-grid">
+            <div class="quarter-card"><div class="quarter-name">1분기: 회복/적응</div><div class="editable" contenteditable="true" id="q1">● 출산 및 몸조리 집중</div><div class="checklist-container" id="list-q1"></div><button class="add-btn" onclick="addCheckItem('list-q1')">+ 할 일 추가</button></div>
+            <div class="quarter-card"><div class="quarter-name">2분기: 학습/준비</div><div class="editable" contenteditable="true" id="q2">● 앱 기획 및 소스 작업</div><div class="checklist-container" id="list-q2"></div><button class="add-btn" onclick="addCheckItem('list-q2')">+ 할 일 추가</button></div>
+            <div class="quarter-card"><div class="quarter-name">3분기: 실행/출시</div><div class="editable" contenteditable="true" id="q3">● 정식 출시 및 계약</div><div class="checklist-container" id="list-q3"></div><button class="add-btn" onclick="addCheckItem('list-q3')">+ 할 일 추가</button></div>
+            <div class="quarter-card"><div class="quarter-name">4분기: 도약/결산</div><div class="editable" contenteditable="true" id="q4">● TA 심화 공부 및 결산</div><div class="checklist-container" id="list-q4"></div><button class="add-btn" onclick="addCheckItem('list-q4')">+ 할 일 추가</button></div>
+        </div>
+    </section>
+
+    <section id="monthly-section">
+        <h2>6. 월간 성과 & 결산 (Monthly Results)</h2>
+        <div class="quarter-grid" id="monthly-container"></div>
+        <button class="add-month-btn" onclick="addMonthlyResult()">+ 월 추가하기</button>
+    </section>
+</div>
+
+<div class="save-bar"><button class="save-btn" onclick="saveAll()">✨ 모든 데이터 저장하기</button></div>
+
+<script>
+    const STORAGE_KEY = '2026_life_dashboard_final_v10';
+    
+    // [분기용] 체크리스트 아이템 추가
+    function addCheckItem(containerId, text = '새 할 일', checked = false) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'checklist-item';
+        itemDiv.innerHTML = `
+            <input type="checkbox" ${checked ? 'checked' : ''}>
+            <div class="checklist-text" contenteditable="true">${text}</div>
+            <button class="delete-btn" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(itemDiv);
+    }
+
+    // [월간용] 성과 아이템 추가 (불릿 포인트형)
+    function addResultLine(containerId, text = '[분야] 성과 내용') {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'result-item';
+        itemDiv.innerHTML = `
+            <span class="bullet">●</span>
+            <div class="result-text" contenteditable="true">${text}</div>
+            <button class="delete-btn" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(itemDiv);
+    }
+
+    // 월 성과 카드 추가
+    function addMonthlyResult(title = '1월 성과', results = []) {
+        const container = document.getElementById('monthly-container');
+        const monthId = 'month-res-' + Date.now();
+        const card = document.createElement('div');
+        card.className = 'quarter-card monthly-card';
+        card.id = 'card-' + monthId;
+        card.innerHTML = `
+            <div class="quarter-name editable" contenteditable="true">${title}</div>
+            <button class="delete-btn" onclick="this.parentElement.remove()" style="float:right">삭제</button>
+            <div id="${monthId}"></div>
+            <button class="add-btn" onclick="addResultLine('${monthId}')">+ 성과 추가</button>
+        `;
+        container.appendChild(card);
+        
+        if(results.length > 0) {
+            results.forEach(resText => addResultLine(monthId, resText));
+        } else {
+            addResultLine(monthId, '[재정] 배당금 정산 / 부업 수익');
+            addResultLine(monthId, '[창작] 인스타툰 / 스톡이미지 성과');
+            addResultLine(monthId, '[기술] 앱 개발 및 공부 진척');
+            addResultLine(monthId, '[육아] 아이 성장 및 특이점');
+        }
+    }
+
+    function saveAll() {
+        const data = { texts: {}, checklists: { q1: [], q2: [], q3: [], q4: [] }, monthlyResults: [] };
+        const ids = ['id-mindset','bp-vision','bp-wealth','bp-health','m1','m2','m3','m4','mc','m5','m6','m7','m8','q1','q2','q3','q4','sd1','sd2','sd3','sw1','sw2','sw3'];
+        
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) data.texts[id] = el.innerText;
+        });
+
+        ['q1','q2','q3','q4'].forEach(q => {
+            const container = document.getElementById(`list-${q}`);
+            if(container) {
+                container.querySelectorAll('.checklist-item').forEach(item => {
+                    data.checklists[q].push({
+                        text: item.querySelector('.checklist-text').innerText,
+                        checked: item.querySelector('input[type="checkbox"]').checked
+                    });
+                });
+            }
+        });
+
+        document.querySelectorAll('.monthly-card').forEach(card => {
+            const title = card.querySelector('.quarter-name').innerText;
+            const results = [];
+            card.querySelectorAll('.result-text').forEach(item => {
+                results.push(item.innerText);
+            });
+            data.monthlyResults.push({ title, results });
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        alert('모든 데이터가 안전하게 저장되었습니다! 🚀');
+    }
+
+    window.onload = () => {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved) {
+            for (let id in saved.texts) { if (document.getElementById(id)) document.getElementById(id).innerText = saved.texts[id]; }
+            for (let q in saved.checklists) { saved.checklists[q].forEach(item => addCheckItem(`list-${q}`, item.text, item.checked)); }
+            if (saved.monthlyResults) { saved.monthlyResults.forEach(m => addMonthlyResult(m.title, m.results)); }
+        } else {
+            const qDefaults = {
+                q1: ['산후조리 및 집 적응', '아기 패턴 기록'],
+                q2: ['앱 MVP 기획', '근력 회복 운동'],
+                q3: ['앱 출시', '웹소설 투고'],
+                q4: ['TA 실무 강의', '연간 결산']
+            };
+            for (let q in qDefaults) qDefaults[q].forEach(t => addCheckItem(`list-${q}`, t));
+            
+            addMonthlyResult('1월 성과', [
+                '[육아] 건강한 아이 탄생 (예정일 1/11)',
+                '[재정] 배당금 정산 / 부업 수익 정산',
+                '[창작] 쓰레드 / 인스타툰 / 스톡이미지 성과',
+                '[기술] 앱 기능 구현 및 학습'
+            ]);
+        }
+    };
+</script>
+
+</body>
+</html>
