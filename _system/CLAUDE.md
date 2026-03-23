@@ -62,7 +62,7 @@
 |------|------------|----------|
 | Novel_Assistant | `_system/repo_configs/Novel_Assistant_CLAUDE.md` | `D:\2027_Novel_Assistant\CLAUDE.md` |
 | instatoon-studio | `_system/repo_configs/instatoon-studio_CLAUDE.md` | `D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio\CLAUDE.md` |
-| Pomory | `_system/repo_configs/Pomory_CLAUDE.md` | Pomory 레포 루트 `CLAUDE.md` |
+| Pomory | `_system/repo_configs/Pomory_CLAUDE.md` | `D:\2027_Git\Pomory\CLAUDE.md` |
 
 이것만 있으면 어느 프로젝트에서 작업해도 모든 기록이 한 vault에 쌓임.
 
@@ -84,7 +84,7 @@
 | vault (이 레포) | `D:\2027_Git\gabi_plan_control` |
 | Novel_Assistant | `D:\2027_Novel_Assistant` |
 | instatoon-studio | `D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio` |
-| Pomory | (Pomory 레포 경로) |
+| Pomory | `D:\2027_Git\Pomory` |
 
 ## 📄 각 레포 문서 규칙
 

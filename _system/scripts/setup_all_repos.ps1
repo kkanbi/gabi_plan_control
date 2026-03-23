@@ -18,13 +18,12 @@ $repos = @(
         path          = "D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio"
         claude_config = "instatoon-studio_CLAUDE.md"
         name          = "instatoon-studio"
+    },
+    @{
+        path          = "D:\2027_Git\Pomory"
+        claude_config = "Pomory_CLAUDE.md"
+        name          = "Pomory"
     }
-    # Pomory 경로 확인 후 아래 추가:
-    # @{
-    #     path          = "D:\[Pomory 경로]"
-    #     claude_config = "Pomory_CLAUDE.md"
-    #     name          = "Pomory"
-    # }
 )
 
 foreach ($repo in $repos) {

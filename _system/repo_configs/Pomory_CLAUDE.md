@@ -44,7 +44,8 @@
 
 ## 프로젝트 정보
 
-- **GitHub**: kkanbi/Pomory
+- **GitHub**: https://github.com/kkanbi/Pomory
+- **로컬 경로**: `D:\2027_Git\Pomory`
 - **연결된 vault**: `D:\2027_Git\gabi_plan_control`
 - **목표**: 뽀모도로 RPG 앱 (Flutter + Hive)
 - **상태**: ⏸️ 일시정지 (2026-04 재개 예정)
