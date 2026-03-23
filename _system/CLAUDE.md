@@ -51,14 +51,18 @@
 
 ## 🆕 새 프로젝트 시작 전 체크
 
-새 프로젝트 레포를 만들면 **루트에 CLAUDE.md를 먼저 만들고** 아래 내용 붙여넣기:
+새 프로젝트 레포를 만들면:
 
-```md
-# CLAUDE.md
-세션 시작 전 D:\2027_Git\gabi_plan_control\_system\Memory.md 읽을 것
-work_log는 D:\2027_Git\gabi_plan_control\work_log.md에 기록할 것
-결정/액션은 각각 D:\2027_Git\gabi_plan_control\_system\Decision_Log.md, Action_Tracker.md에 기록
-```
+1. **`_system/repo_configs/`에 있는 해당 레포 CLAUDE.md 템플릿**을 레포 루트에 복사
+2. **레포 루트에 `docs/` 폴더 생성** — `_templates/docs/` 안의 3개 파일 복사
+3. **레포 루트에 `README.md` 생성** — `_templates/README_template.md` 복사 후 수정
+
+### 레포별 CLAUDE.md 위치
+| 레포 | 템플릿 위치 | 복사 대상 |
+|------|------------|----------|
+| Novel_Assistant | `_system/repo_configs/Novel_Assistant_CLAUDE.md` | `D:\2027_Novel_Assistant\CLAUDE.md` |
+| instatoon-studio | `_system/repo_configs/instatoon-studio_CLAUDE.md` | `D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio\CLAUDE.md` |
+| Pomory | `_system/repo_configs/Pomory_CLAUDE.md` | Pomory 레포 루트 `CLAUDE.md` |
 
 이것만 있으면 어느 프로젝트에서 작업해도 모든 기록이 한 vault에 쌓임.
 
@@ -72,6 +76,36 @@ work_log는 D:\2027_Git\gabi_plan_control\work_log.md에 기록할 것
 | `freelancer_strategy_v2.md` | 전체 프리랜서 전략 계획 (거의 안 바꿈) |
 | `app_ideas.md` | 앱 아이디어 & 우선순위 |
 | `freelancer_timeline_v3.html` | 시각화 타임라인 (분기별 업데이트) |
+
+## 🖥️ 로컬 경로 (Windows)
+
+| 레포 | 경로 |
+|------|------|
+| vault (이 레포) | `D:\2027_Git\gabi_plan_control` |
+| Novel_Assistant | `D:\2027_Novel_Assistant` |
+| instatoon-studio | `D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio` |
+| Pomory | (Pomory 레포 경로) |
+
+## 📄 각 레포 문서 규칙
+
+각 레포는 다음 구조를 유지:
+```
+repo-root/
+├── README.md          ← 프로젝트 개요 + 진행 현황
+├── CLAUDE.md          ← AI 컨텍스트 (_system/repo_configs/ 참고)
+└── docs/
+    ├── CHANGELOG.md   ← 변경이력 + 문제해결기록 (Problem/Cause/Solution)
+    ├── ARCHITECTURE.md← 구조 설계 문서
+    └── SETUP.md       ← 개발환경 설정
+```
+
+**CHANGELOG 문제 해결 기록 형식 (필수)**:
+```
+### [PROB-XXX] 제목 (YYYY-MM-DD)
+**문제 (Problem)**: 증상
+**원인 (Cause)**: 근본 원인
+**해결 방법 (Solution)**: 해결 단계
+```
 
 ---
 
