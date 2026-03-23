@@ -52,6 +52,25 @@ SORT file.mtime DESC
 
 ---
 
+## 🤖 AI Brain
+
+| 문서 | 역할 |
+|------|------|
+| [[_system/Memory\|🧠 Memory]] | 세션 시작 필독 — 현재 상태 총정리 |
+| [[_system/Action_Tracker\|✅ Action Tracker]] | 진행 중 할 일 + 데드라인 |
+| [[_system/Decision_Log\|🗂️ Decision Log]] | 결정 이력 (왜 그렇게 했는지) |
+
+## 📝 최근 세션
+
+```dataview
+LIST
+FROM "70_Sessions"
+SORT file.ctime DESC
+LIMIT 5
+```
+
+---
+
 ## 🗓️ 전략 & 플랜
 
 | 문서 | 설명 |
