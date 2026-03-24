@@ -11,6 +11,9 @@
 1. `D:\2027_Git\gabi_plan_control\_system\Memory.md` 읽기 — 현재 페이즈 파악
 2. `D:\2027_Git\gabi_plan_control\_system\Action_Tracker.md` 확인 — 기한 초과 항목 알림
 3. 이 레포의 `docs/CHANGELOG.md` 확인 — 최근 변경사항 파악
+4. **`D:\Google_Drive_Online\소설\` 폴더 확인** — 챕터 파일 수, 최근 수정 파일 체크
+   - 지난 세션 이후 새로 추가/수정된 파일 있으면 → "XX장 작업됐네요, work_log에 기록할까요?" 물어보기
+   - 폴더 접근 불가 시 → 무시하고 진행 (오프라인 등)
 
 ---
 
@@ -19,6 +22,7 @@
 | 기록 타입 | 저장 위치 |
 |-----------|---------|
 | 작업 로그 | `D:\2027_Git\gabi_plan_control\work_log.md` |
+| 소설 원고 | `D:\Google_Drive_Online\소설\` (읽기 전용 참고) |
 | 중요 결정 | `D:\2027_Git\gabi_plan_control\_system\Decision_Log.md` |
 | 새 할 일 | `D:\2027_Git\gabi_plan_control\_system\Action_Tracker.md` |
 | 세션 요약 | `D:\2027_Git\gabi_plan_control\70_Sessions\YYYY-MM-DD_novel.md` |

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "60_Journal/2026-03-22.md",
+                "file": "60_Journal/2026-03-23.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-22"
+              "title": "2026-03-23"
             }
           }
         ]
@@ -206,12 +206,28 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "d8e429ce7cef6367",
+  "active": "38ae9396a0ae5a9a",
   "lastOpenFiles": [
-    "2026-03-23.md",
+    "_system/GabiOS_Guide.md",
     "60_Journal/2026-03-22.md",
-    "무제.base",
-    "_system/scripts/worklog_history.log",
+    "60_Journal/2026-03-23.md",
+    "_templates/README_template.md",
+    "_system/Master_Reference.md",
+    "_templates/capture.md",
+    "_templates/project.md",
+    "_templates/learn-course.md",
+    "_templates/docs/CHANGELOG_template.md",
+    "_templates/docs/SETUP_template.md",
+    "_templates/docs/ARCHITECTURE_template.md",
+    "_system/SETUP_GUIDE.md",
+    "_system/Memory.md",
+    "_system/Decision_Log.md",
+    "_system/CLI_SETUP_WINDOWS.md",
+    "_system/CLAUDE.md",
+    "_system/Action_Tracker.md",
+    "_system/repo_configs/Pomory_CLAUDE.md",
+    "_system/repo_configs/Novel_Assistant_CLAUDE.md",
+    "_system/repo_configs/instatoon-studio_CLAUDE.md",
     "80_Archive/work_log_old.md",
     "50_Strategy/freelancer_strategy_v2.md",
     "_system/scripts/run_worklog.bat",
@@ -221,15 +237,10 @@
     "gabi_brain",
     "generate_worklog.py",
     "gitignore",
-    "_system/SETUP_GUIDE.md",
     "_system/scripts/setup_scheduler.ps1",
     "gabi_brain/_system/SETUP_GUIDE.md",
     "_templates/think.md",
-    "_templates/project.md",
-    "_templates/learn-course.md",
     "_templates/daily-journal.md",
-    "_templates/capture.md",
-    "README.md",
-    "_system/CLAUDE.md"
+    "README.md"
   ]
 }
