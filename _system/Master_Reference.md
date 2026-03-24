@@ -94,18 +94,7 @@ git worktree remove ../gabi_main        # 제거
 
 ## 8. 이 Vault 구조
 
-| 폴더 | 역할 |
-|------|------|
-| 00_Inbox | 처리 전 임시 |
-| 10_Capture | 레퍼런스/스크랩 |
-| 20_Learn | 학습 노트 |
-| 30_Think | 아이디어 |
-| 40_Projects | 프로젝트별 노트 |
-| 50_Strategy | 전략/타임라인 |
-| 60_Journal | 자동 생성 작업일지 |
-| 70_Sessions | Claude 세션 요약 (← 지금 이 파일) |
-| _system | Claude 시스템 파일 (Memory, Action_Tracker, Decision_Log, CLAUDE.md) |
-| _templates | Templater 템플릿 + 레포 초기화 템플릿 |
+→ `_system/Memory.md` 참조 (Vault 구조 표 포함)
 
 ---
 
@@ -127,14 +116,7 @@ repo-root/
 
 ## 10. work_log 작성 규칙
 
-```
-### YYYY-MM-DD
-- [예정] 계획상 해야 했던 것 (없으면 생략)
-- [실제] 실제로 한 것
-- [이유] 계획과 다를 때만 한 줄
-```
-
-한 줄이면 충분. 완벽하게 쓰려 하지 말 것.
+→ `_system/CLAUDE.md` 참조 (작성 형식 및 원칙 포함)
 
 ---
 
