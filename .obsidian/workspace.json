@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_templates/README_template.md",
+                "file": "60_Journal/2026-03-23.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README_template"
+              "title": "2026-03-23"
             }
           }
         ]
@@ -197,7 +197,10 @@
   },
   "active": "38ae9396a0ae5a9a",
   "lastOpenFiles": [
+    "_system/GabiOS_Guide.md",
+    "60_Journal/2026-03-22.md",
     "60_Journal/2026-03-23.md",
+    "_templates/README_template.md",
     "_system/Master_Reference.md",
     "_templates/capture.md",
     "_templates/project.md",
@@ -214,7 +217,6 @@
     "_system/repo_configs/Pomory_CLAUDE.md",
     "_system/repo_configs/Novel_Assistant_CLAUDE.md",
     "_system/repo_configs/instatoon-studio_CLAUDE.md",
-    "60_Journal/2026-03-22.md",
     "80_Archive/work_log_old.md",
     "50_Strategy/freelancer_strategy_v2.md",
     "_system/scripts/run_worklog.bat",
