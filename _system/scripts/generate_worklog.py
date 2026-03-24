@@ -35,11 +35,9 @@ GITHUB_USERNAME = "kkanbi"
 # 작업일지 레포 (이 레포는 커밋 수집에서 제외)
 EXCLUDE_REPOS = ["gabi_plan_control"]
 
-# 옵시디언 볼트 경로 (Windows)
-VAULT_PATH = Path(os.environ.get(
-    "VAULT_PATH",
-    r"D:\2027_Git\gabi_plan_control"
-))
+# 옵시디언 볼트 경로
+# 환경변수 VAULT_PATH 우선, 없으면 스크립트 위치 기준으로 자동 계산 (_system/scripts/ 기준 2단계 상위)
+VAULT_PATH = Path(os.environ.get("VAULT_PATH") or Path(__file__).resolve().parent.parent.parent)
 
 # 일지 저장 폴더
 JOURNAL_DIR = VAULT_PATH / "60_Journal"

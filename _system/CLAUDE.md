@@ -12,8 +12,7 @@
 1. **`_system/Memory.md` 읽기** — 현재 페이즈, 프로젝트 상태 파악
 2. **`_system/Action_Tracker.md` 확인** — 기한 초과 항목 있으면 알림
 3. **오늘 `60_Journal/YYYY-MM-DD.md` 확인** — 오늘 로그 있는지 확인
-4. **`work_log.md` 마지막 항목 확인** → 마지막 작업이 오늘 날짜인지 확인
-5. **오늘 날짜 항목이 없으면 묻기**:
+4. **오늘 날짜 항목이 없으면 묻기**:
    > "오늘 뭐 했어? work_log에 기록해줄게 (한 줄이면 됨)"
 
 **세션 끝에:**
@@ -67,24 +66,6 @@
 이것만 있으면 어느 프로젝트에서 작업해도 모든 기록이 한 vault에 쌓임.
 
 ---
-
-## 📁 핵심 파일 위치
-
-| 파일 | 역할 |
-|------|------|
-| `work_log.md` | 날짜별 실제 작업 기록 (자주 업데이트) |
-| `freelancer_strategy_v2.md` | 전체 프리랜서 전략 계획 (거의 안 바꿈) |
-| `app_ideas.md` | 앱 아이디어 & 우선순위 |
-| `freelancer_timeline_v3.html` | 시각화 타임라인 (분기별 업데이트) |
-
-## 🖥️ 로컬 경로 (Windows)
-
-| 레포 | 경로 |
-|------|------|
-| vault (이 레포) | `D:\2027_Git\gabi_plan_control` |
-| Novel_Assistant | `D:\2027_Novel_Assistant` |
-| instatoon-studio | `D:\2027_Git_SideProject\SideProject_Plan\instatoon-studio` |
-| Pomory | `D:\2027_Git\Pomory` |
 
 ## 📄 각 레포 문서 규칙
 
