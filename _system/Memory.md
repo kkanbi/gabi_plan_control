@@ -37,9 +37,11 @@
 - 상태: 진행 중 (웹소설과 병행)
 - 목적: @creator_kkanbi Instagram 콘텐츠 자동화
 
-### 3. 뽀모도로 RPG 앱 (Pomory) — PAUSED
+### 3. 뽀모도로 RPG 앱 (Pomory) — ACTIVE
 - Repo: github.com/kkanbi/Pomory
-- 상태: 보류 (위 두 프로젝트 완료 후 Phase 3에서 재개)
+- 상태: 진행 중 (온보딩 화면 완료 2026-03-25)
+- 완료: 스플래시, 온보딩 1/2/3 UI + 인터랙션
+- 다음: 타이머 화면 구현
 - 출시 목표: 2026.08
 - 기술: Flutter + Hive (로컬)
 
