@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "70_Sessions/2026-03-24_클로드대화 옵시디언에 정리.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-24_클로드대화 옵시디언에 정리"
+              "title": "README"
             }
           }
         ]
@@ -197,15 +197,19 @@
   },
   "active": "faf0c4dc54947aa6",
   "lastOpenFiles": [
+    "00_Dashboard.md",
+    "2026-03-25.md",
+    "70_Sessions/2026-03-24_클로드대화 옵시디언에 정리.md",
+    "60_Journal/2026-03-24.md",
+    "60_Journal/2026-03-23.md",
     "gabi_brain/_system/scripts/generate_worklog.py",
     "gabi_brain/_system/scripts",
     "gabi_brain/_system",
     "gabi_brain",
-    "60_Journal/2026-03-24.md",
     "60_Journal/2026-03-22.md",
-    "2026-03-25.md",
-    "70_Sessions/2026-03-24_클로드대화 옵시디언에 정리.md",
-    "60_Journal/2026-03-23.md",
+    "_system/Action_Tracker.md.tmp.36052.1774439618707",
+    "_system/Action_Tracker.md.tmp.36052.1774439609866",
+    "_system/Memory.md.tmp.36052.1774439599480",
     "_system/templates/session_summary_template.md",
     "_system/templates",
     "50_Strategy/Game_project-launch-schedule_Template.html",
@@ -228,10 +232,6 @@
     "_system/Action_Tracker.md",
     "_system/repo_configs/Pomory_CLAUDE.md",
     "_system/repo_configs/Novel_Assistant_CLAUDE.md",
-    "_system/repo_configs/instatoon-studio_CLAUDE.md",
-    "_system/scripts/run_worklog.bat",
-    "gabi_brain/_system/scripts/run_worklog.bat",
-    "generate_worklog.py",
-    "gitignore"
+    "_system/repo_configs/instatoon-studio_CLAUDE.md"
   ]
 }
