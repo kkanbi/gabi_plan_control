@@ -34,6 +34,8 @@
 | Vault 구조 셋업 | System | 2026-03-22 |
 | AI Brain 시스템 도입 (Memory.md + 라우팅 규칙) | System | 2026-03-22 |
 | Pomory 온보딩 화면 완성 (스플래시 + 3페이지) | Pomory | 2026-03-25 |
+| workspace.json git 추적 제거 + bat 에러 감지 추가 | System | 2026-03-26 |
+| _system/CHANGELOG.md 신규 생성 | System | 2026-03-26 |
 
 ---
 
