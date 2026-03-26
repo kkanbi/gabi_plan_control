@@ -6,7 +6,15 @@
       "Bash(schtasks /query /fo LIST /v)",
       "Bash(schtasks /query /fo CSV)",
       "Bash(python _system/scripts/generate_worklog.py 2026-03-25)",
-      "Bash(GITHUB_PAT=\"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\" VAULT_PATH=\"D:/2027_Git/gabi_plan_control\" python _system/scripts/generate_worklog.py 2026-03-25)"
+      "Bash(GITHUB_PAT=\"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\" VAULT_PATH=\"D:/2027_Git/gabi_plan_control\" python _system/scripts/generate_worklog.py 2026-03-25)",
+      "Bash(schtasks /query /fo CSV /v)",
+      "Bash(schtasks /query /fo TABLE)",
+      "Bash(powershell -Command \"Get-ScheduledTask | Where-Object {$_TaskName -match ''gabi|worklog|python''} | Select-Object TaskName, TaskPath\")",
+      "Bash(powershell.exe -Command \"Get-ScheduledTask | Select-Object TaskName | Where-Object {$_skName -match ''''gabi|worklog|python|brain''''}\")",
+      "Bash(powershell.exe -Command \"Get-ScheduledTask | Select-Object TaskName\")",
+      "Bash(powershell.exe -Command \"Get-ScheduledTask -TaskName ''GabiBrain_DailyWorkLog'' | Get-ScheduledTaskInfo\")",
+      "Bash(powershell.exe -Command \"$t = Get-ScheduledTask -TaskName ''GabiBrain_DailyWorkLog''; $t.Actions; $t.Triggers\")",
+      "Bash(find D:/2027_Git/gabi_plan_control -name CHANGELOG* -o -name changelog* -o -name *change* -o -name *log*)"
     ]
   }
 }
