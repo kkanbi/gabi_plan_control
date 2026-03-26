@@ -2,6 +2,19 @@
 
 ---
 
+### 2026-03-26 (세션 3)
+- [기능] 옵시디언 Vault 연동 구현 (File System Access API)
+  - 사이드바 "Vault 폴더 연결" 버튼 → showDirectoryPicker()로 폴더 권한 부여
+  - 저장 시 category/{title}.md 자동 생성 (YAML frontmatter + 마크다운 형식)
+  - 삭제 시 .md 파일 자동 삭제
+  - "전체 동기화" 버튼으로 기존 항목 일괄 export
+  - IndexedDB에 폴더 핸들 저장 → 재시작 시 권한 재요청으로 재연결
+- [기능] Toast 알림 시스템 추가 (success/error 색상 구분)
+- [기능] API 설정 모달 추가
+  - YouTube Data API v3 키 입력 → 영상 설명/태그 기반 자동 분류
+  - API 키 없으면 기존 oEmbed 폴백 유지
+- [기능] 컨텐츠 내용 기반 태그 추출 (extractKeywordsFromText) - 설명 텍스트 키워드 분석
+
 ### 2026-03-26 (세션 2)
 - [버그수정] 테이블 뷰 날짜/아이콘 겹침 → card-actions width 90→116px로 확대
 - [기능개선] 카테고리·태그 칩 UI 추가
