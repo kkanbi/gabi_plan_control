@@ -2,6 +2,16 @@
 
 ---
 
+### 2026-03-26 (세션 2)
+- [버그수정] 테이블 뷰 날짜/아이콘 겹침 → card-actions width 90→116px로 확대
+- [기능개선] 카테고리·태그 칩 UI 추가
+  - 폼 하단에 기존 카테고리/태그 칩 표시, 클릭으로 선택/토글
+  - 저장·로드·클리어·URL 자동완성 시 칩 갱신 (updateFormChips)
+  - 선택된 항목 active 상태로 시각적 표시
+- [버그수정] URL 붙여넣기 자동완성 미동작 수정
+  - suggestCategory: 기존 항목 없어도 도메인 기본값 반환 (youtube→영상, github→개발 등)
+  - suggestTags: 기존 태그 없어도 플랫폼 기본 태그 반환 (youtube→영상/유튜브 등)
+
 ### 2026-03-26
 - [실제] vault 인프라 버그 2건 수정
   - `.obsidian/workspace.json` git 추적 제거 (git rm --cached → push)
