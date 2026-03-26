@@ -2,6 +2,15 @@
 
 ---
 
+### 2026-03-26 (세션 4)
+- [기능] Gemini API 통합 - 제목 기반 카테고리/태그 자동 분류
+  - YouTube API 제거 → Gemini API 하나로 통합
+  - API 설정 모달: Gemini API 키 입력 (Google AI Studio 무료 발급)
+  - 제목 옆 "✨ AI 분류" 버튼: 현재 제목으로 Gemini 분류 즉시 실행
+  - URL 붙여넣기 시 제목 확보 후 Gemini 자동 호출 (키 없으면 URL 기반 폴백)
+  - 기존 카테고리/태그 목록 프롬프트에 포함 → 일관된 분류 유지
+  - 모델: gemini-2.0-flash (무료 티어)
+
 ### 2026-03-26 (세션 3)
 - [기능] 옵시디언 Vault 연동 구현 (File System Access API)
   - 사이드바 "Vault 폴더 연결" 버튼 → showDirectoryPicker()로 폴더 권한 부여
