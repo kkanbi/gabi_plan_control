@@ -2,6 +2,16 @@
 
 ---
 
+### 2026-03-26 (세션 6)
+- [버그수정] Gemini 모델 호환성 해결: gemini-2.0-flash → limit:0, gemini-1.5-flash → 404
+  - 원인: 무료 티어에서 2.0 모델 미지원, 1.5 모델 deprecated
+  - 해결: gemini-2.5-flash 모델로 전환 (무료 티어 정상 동작)
+- [버그수정] responseMimeType 제거 → 응답 잘림(MAX_TOKENS) 해결
+- [버그수정] maxOutputTokens 200→8192 + 프롬프트 간결화 → JSON 완성 보장
+- [개선] Gemini 자동 호출 제거 → ✨ AI 분류 버튼 수동 호출만 (API 낭비 방지)
+- [개선] Gemini 에러 메시지 상세화 (실제 API 에러 텍스트 토스트 표시)
+- [개선] 모델 드롭다운 업데이트: gemini-2.5-flash(권장), 2.5-flash-lite(경량), 2.0-flash
+
 ### 2026-03-26 (세션 5)
 - [버그수정] Gemini 429 에러 → 명확한 한국어 메시지로 처리
 - [기능] 일반 링크 제목 자동추출 (allorigins.win CORS 프록시 → og:title / <title> 파싱)
