@@ -6,6 +6,17 @@
 
 ---
 
+## 2026-03-26: vault 인프라 버그 수정 2건
+
+- **결정**: workspace.json git 추적 제거 + worklog bat 파일 에러 감지 추가
+- **이유**:
+  - `.obsidian/workspace.json`이 .gitignore에 있었지만 이미 tracked 상태라 매 세션마다 push/pull 충돌 발생 → `git rm --cached`로 해제
+  - `run_worklog.bat`이 Python 종료 코드를 확인 안 해서 스크립트 실패 시에도 "Work log generated" 로그 기록 → `%ERRORLEVEL%` 체크 추가
+- **영향**: obsidian-git 자동 커밋 시 workspace.json 포함 안 됨. 스크립트 실패 시 로그에 `ERROR:` 로 명확히 기록됨
+- **원인이 된 사건**: 2026-03-25 저널 미생성 (run_worklog.bat 실패를 감지 못함)
+
+---
+
 ## 2026-03-22: AI Brain 시스템 도입
 
 - **결정**: Fraser Cottrell 방식의 Memory.md + 라우팅 규칙 시스템 적용
