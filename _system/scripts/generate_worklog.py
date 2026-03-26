@@ -33,7 +33,7 @@ GITHUB_TOKEN = os.environ.get("GITHUB_PAT", "")
 GITHUB_USERNAME = "kkanbi"
 
 # 작업일지 레포 (이 레포는 커밋 수집에서 제외)
-EXCLUDE_REPOS = ["gabi_plan_control"]
+EXCLUDE_REPOS = []
 
 # 옵시디언 볼트 경로
 # 환경변수 VAULT_PATH 우선, 없으면 스크립트 위치 기준으로 자동 계산 (_system/scripts/ 기준 2단계 상위)
