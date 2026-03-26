@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(schtasks /query /tn GabiBrain*)",
+      "Bash(schtasks /query /fo LIST)",
+      "Bash(schtasks /query /fo LIST /v)",
+      "Bash(schtasks /query /fo CSV)",
+      "Bash(python _system/scripts/generate_worklog.py 2026-03-25)",
+      "Bash(GITHUB_PAT=\"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\" VAULT_PATH=\"D:/2027_Git/gabi_plan_control\" python _system/scripts/generate_worklog.py 2026-03-25)"
+    ]
+  }
+}
