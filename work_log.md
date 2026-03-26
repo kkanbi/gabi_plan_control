@@ -2,6 +2,15 @@
 
 ---
 
+### 2026-03-26 (세션 5)
+- [버그수정] Gemini 429 에러 → 명확한 한국어 메시지로 처리
+- [기능] 일반 링크 제목 자동추출 (allorigins.win CORS 프록시 → og:title / <title> 파싱)
+- [기능] Twitter/X 트윗 내용 자동추출 (publish.twitter.com oEmbed, 무료)
+- [기능] Threads 게시물 제목 추출 (allorigins 프록시 → og:title)
+- [기능] Instagram 공개 게시물 제목 시도 (allorigins, 로그인 필요 게시물은 불가)
+- [개선] detectPlatform에 threads.net 추가
+- 옵시디언 저장 경로: 00_Inbox/날짜/ 구조로 변경
+
 ### 2026-03-26 (세션 4)
 - [기능] Gemini API 통합 - 제목 기반 카테고리/태그 자동 분류
   - YouTube API 제거 → Gemini API 하나로 통합
