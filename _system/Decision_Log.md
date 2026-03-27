@@ -6,6 +6,15 @@
 
 ---
 
+## 2026-03-27: GitHub PAT 관리 방식 — Windows 환경변수 채택
+
+- **결정**: GITHUB_PAT를 Windows 사용자 환경변수에 저장
+- **이유**: bat 파일 하드코딩(git 노출 위험), .env 파일(실수로 commit 위험)보다 안전. 개인 PC 단독 사용 기준으로 가장 무난한 방식.
+- **영향**: run_worklog.bat이 `%GITHUB_PAT%` 환경변수 참조로 동작. git에 PAT 없이 커밋 가능.
+- **관련**: .gitignore에서 run_worklog.bat 제외 규칙 삭제
+
+---
+
 ## 2026-03-26: vault 인프라 버그 수정 2건
 
 - **결정**: workspace.json git 추적 제거 + worklog bat 파일 에러 감지 추가
