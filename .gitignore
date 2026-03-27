@@ -1,8 +1,5 @@
 # === Gabi Brain .gitignore ===
 
-# PAT 토큰이 포함된 실행 파일
-_system/scripts/run_worklog.bat
-
 # 로그 파일
 _system/scripts/*.log
 
