@@ -13,11 +13,19 @@ $trigger = New-ScheduledTaskTrigger -Daily -At "23:50"
 # 실행 설정
 $action = New-ScheduledTaskAction -Execute $scriptPath
 
-# 옵션: 컴퓨터가 켜져 있을 때만, 배터리에서도 실행
+# 옵션: 배터리에서도 실행 + 놓친 작업 다음 부팅 시 실행
 $settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
-    -StartWhenAvailable
+    -StartWhenAvailable `
+    -ExecutionTimeLimit (New-TimeSpan -Minutes 30) `
+    -MultipleInstances IgnoreNew
+
+# 현재 로그인 사용자로 실행 (환경변수 접근 가능하도록)
+$principal = New-ScheduledTaskPrincipal `
+    -UserId "$env:USERDOMAIN\$env:USERNAME" `
+    -LogonType Interactive `
+    -RunLevel Highest
 
 # 등록
 Register-ScheduledTask `
@@ -25,6 +33,7 @@ Register-ScheduledTask `
     -Trigger $trigger `
     -Action $action `
     -Settings $settings `
+    -Principal $principal `
     -Description "Gabi Brain: Collect GitHub commits and generate daily work log"
 
 Write-Host ""
