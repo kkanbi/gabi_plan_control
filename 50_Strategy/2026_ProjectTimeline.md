@@ -9,29 +9,39 @@ phase_end: 2026-03-31
 projects:
   - name: 뽀모도로 앱
     repo: Pomory
+    emoji: "📱"
     status: 개발재개
     launch_target: 2026-08
     revenue_target: 30
+    keywords: [pomory, pomodoro, 뽀모도로, fairy, 요정]
   - name: 타임블록 앱
     repo: time-block
+    emoji: "📱"
     status: 대기
     launch_target: 2027-02
     revenue_target: 50
+    keywords: [timeblock, 타임블록, time-block]
   - name: 버튜버 외주
     repo: vtuber
+    emoji: "🎨"
     status: 학습준비
     launch_target: 2027-04
     revenue_target: 120
+    keywords: [vtuber, 버튜버, blender, 블렌더, unity, 유니티, rigging, 리깅, vrm]
   - name: 웹소설
     repo: Novel_Assistant
+    emoji: "📝"
     status: 진행중
     launch_target: null
     revenue_target: 0
+    keywords: [novel, 웹소설, 소설, novel_assistant]
   - name: 스톡이미지
     repo: stock-image
+    emoji: "🖼️"
     status: 대기
     launch_target: 2026-08
     revenue_target: 5
+    keywords: [stock, 스톡, 이미지]
 income_target_final: 185
 ---
 
