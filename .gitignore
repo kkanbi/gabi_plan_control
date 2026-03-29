@@ -1,5 +1,8 @@
 # === Gabi Brain .gitignore ===
 
+# Claude Code 로컬 설정 (기기마다 다르고 민감 정보 포함 가능)
+.claude/settings.local.json
+
 # 로그 파일
 _system/scripts/*.log
 

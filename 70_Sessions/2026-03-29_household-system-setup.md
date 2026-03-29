@@ -13,7 +13,7 @@ tags: [session, system, household, bugfix]
 - 기존 문서에 있는 항목은 스킵, 신규만 추가하는 방식 확정
 
 ### 2. 레포 구조 개선
-- `20_Home/` 폴더 신설 → household 문서 이동 (기존 50_Strategy는 전략 문서만)
+- `25_Home/` 폴더 신설 → household 문서 이동 (기존 50_Strategy는 전략 문서만)
 - `gabi_brain/`, `work_log.md` 삭제
 - 브랜치 작업 → main 직접 작업 방식으로 전환 (1인 레포 기준)
 

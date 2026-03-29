@@ -15,6 +15,7 @@ gabi_brain/
 ├── 20_Learn/           ← 공부한 것 정리
 │   ├── courses/        ← 강의 노트
 │   └── books/          ← 책/아티클 정리
+├── 25_Home/            ← 집안 관리 (식재료, 소모품)
 ├── 30_Think/           ← 내 생각 발전시키기
 │   ├── ideas/          ← 아이디어
 │   └── patterns/       ← UI 패턴, 디자인 원칙
