@@ -1,6 +1,13 @@
 # Gabi Brain - Windows Task Scheduler 자동 등록
 # PowerShell에서 관리자 권한으로 실행
 
+# 관리자 권한 확인
+if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "[ERROR] 관리자 권한으로 실행해주세요." -ForegroundColor Red
+    Write-Host "  PowerShell을 우클릭 → '관리자 권한으로 실행' 후 다시 시도하세요." -ForegroundColor Yellow
+    exit 1
+}
+
 $taskName = "GabiBrain_DailyWorkLog"
 $scriptPath = "D:\2027_Git\gabi_plan_control\_system\scripts\run_worklog.bat"
 
@@ -28,22 +35,30 @@ $principal = New-ScheduledTaskPrincipal `
     -RunLevel Highest
 
 # 등록
-Register-ScheduledTask `
-    -TaskName $taskName `
-    -Trigger $trigger `
-    -Action $action `
-    -Settings $settings `
-    -Principal $principal `
-    -Description "Gabi Brain: Collect GitHub commits and generate daily work log"
+try {
+    Register-ScheduledTask `
+        -TaskName $taskName `
+        -Trigger $trigger `
+        -Action $action `
+        -Settings $settings `
+        -Principal $principal `
+        -Description "Gabi Brain: Collect GitHub commits and generate daily work log" `
+        -ErrorAction Stop | Out-Null
 
-Write-Host ""
-Write-Host "Task Scheduler registered!" -ForegroundColor Green
-Write-Host "  Name: $taskName" -ForegroundColor Cyan
-Write-Host "  Time: Every day at 23:50" -ForegroundColor Cyan
-Write-Host "  Script: $scriptPath" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "To test now:" -ForegroundColor Yellow
-Write-Host "  schtasks /run /tn $taskName" -ForegroundColor White
-Write-Host ""
-Write-Host "To check status:" -ForegroundColor Yellow
-Write-Host "  schtasks /query /tn $taskName" -ForegroundColor White
+    Write-Host ""
+    Write-Host "Task Scheduler registered!" -ForegroundColor Green
+    Write-Host "  Name: $taskName" -ForegroundColor Cyan
+    Write-Host "  Time: Every day at 23:50" -ForegroundColor Cyan
+    Write-Host "  Script: $scriptPath" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "To test now:" -ForegroundColor Yellow
+    Write-Host "  schtasks /run /tn $taskName" -ForegroundColor White
+    Write-Host ""
+    Write-Host "To check status:" -ForegroundColor Yellow
+    Write-Host "  schtasks /query /tn $taskName" -ForegroundColor White
+} catch {
+    Write-Host ""
+    Write-Host "[ERROR] Task Scheduler 등록 실패:" -ForegroundColor Red
+    Write-Host "  $_" -ForegroundColor Red
+    exit 1
+}
