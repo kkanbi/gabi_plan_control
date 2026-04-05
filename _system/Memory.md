@@ -28,14 +28,15 @@
 
 ## Active Projects (우선순위 순)
 
-### 1. 웹소설 어시스턴트 (Novel_Assistant) — ACTIVE
+### 1. 웹소설 어시스턴트 (Novel_Assistant) — 기능 완료, 집필 중
 - Repo: github.com/kkanbi/Novel_Assistant
-- 상태: 진행 중
-- 목적: 보조 프로젝트 → @creator_kkanbi 콘텐츠 연동
+- 상태: 기능 개발 완료 / 웹소설 직접 집필 중
+- 목적: 보조 도구 완성 → @creator_kkanbi 콘텐츠 연동
 
-### 2. 인스타툰 자동생성기 — ACTIVE
-- 상태: 진행 중 (웹소설과 병행)
-- 목적: @creator_kkanbi Instagram 콘텐츠 자동화
+### 2. 인스타툰 자동생성기 — 보류
+- 상태: API 비용 문제로 사용 안 하기로 결정
+- 대체: Gemini에서 직접 작업
+- 목적: 파이프라인 확인만 하고 종료
 
 ### 3. 뽀모도로 RPG 앱 (Pomory) — ACTIVE
 - Repo: github.com/kkanbi/Pomory
