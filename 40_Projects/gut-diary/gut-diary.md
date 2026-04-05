@@ -1,6 +1,6 @@
 ---
 type: project
-status: 진행중
+status: 완료
 tags: [식단, 건강, 웹앱]
 started: 2026-04-05
 deadline: 
