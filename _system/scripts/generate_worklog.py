@@ -37,6 +37,9 @@ VAULT_PATH   = Path(os.environ.get("VAULT_PATH") or Path(__file__).resolve().par
 JOURNAL_DIR  = VAULT_PATH / "60_Journal"
 TIMELINE_PATH = VAULT_PATH / "50_Strategy" / "2026_ProjectTimeline.md"
 
+# 소설 폴더 경로 (환경변수로 override 가능)
+NOVEL_PATH = Path(os.environ.get("NOVEL_PATH", r"D:\Google_Drive_Online\소설\BL_껍질이깨지는파열음"))
+
 KST = timezone(timedelta(hours=9))
 
 
@@ -313,7 +316,33 @@ def collect_all_commits(date_str):
 
 
 # ═══════════════════════════════════════════════════════════════
-# 3. 커밋 → 플랜 매칭
+# 3. 소설 집필 체크 (로컬 Google Drive 동기화 폴더)
+# ═══════════════════════════════════════════════════════════════
+
+def check_novel_activity(date_str):
+    """
+    NOVEL_PATH 폴더에서 해당 날짜에 수정된 파일 목록 반환.
+    폴더가 없으면 빈 리스트.
+    """
+    if not NOVEL_PATH.exists():
+        print(f"  [SKIP] 소설 폴더 없음: {NOVEL_PATH}")
+        return []
+
+    target = datetime.strptime(date_str, "%Y-%m-%d").date()
+    modified = []
+
+    for f in NOVEL_PATH.rglob("*"):
+        if not f.is_file():
+            continue
+        mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=KST).date()
+        if mtime == target:
+            modified.append(f.name)
+
+    return modified
+
+
+# ═══════════════════════════════════════════════════════════════
+# 4. 커밋 → 플랜 매칭
 # ═══════════════════════════════════════════════════════════════
 
 def match_commits_to_plan(commits, plans, projects):
@@ -364,10 +393,10 @@ def match_commits_to_plan(commits, plans, projects):
 
 
 # ═══════════════════════════════════════════════════════════════
-# 4. 마크다운 일지 생성
+# 5. 마크다운 일지 생성
 # ═══════════════════════════════════════════════════════════════
 
-def generate_journal(date_str, commits, matched, unmatched, phase):
+def generate_journal(date_str, commits, matched, unmatched, phase, novel_files=None):
     dt      = datetime.strptime(date_str, "%Y-%m-%d")
     weekday = ["월", "화", "수", "목", "금", "토", "일"][dt.weekday()]
     prev    = (dt - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -424,6 +453,15 @@ def generate_journal(date_str, commits, matched, unmatched, phase):
         lines.extend(f"- `{c['repo']}` {c['message']} ({c['sha']})" for c in unmatched)
         lines.append("")
 
+    lines += ["## 웹소설 집필", ""]
+    if novel_files:
+        lines.append("✅ 오늘 집필함")
+        for fname in novel_files:
+            lines.append(f"- {fname}")
+    else:
+        lines.append("➖ 오늘 집필 없음")
+    lines.append("")
+
     lines += ["## 요약", ""]
     if total_plans > 0:
         rate = round(matched_count / total_plans * 100)
@@ -438,7 +476,7 @@ def generate_journal(date_str, commits, matched, unmatched, phase):
 
 
 # ═══════════════════════════════════════════════════════════════
-# 5. 파일 저장 및 Git push
+# 6. 파일 저장 및 Git push
 # ═══════════════════════════════════════════════════════════════
 
 def save_journal(date_str, content):
@@ -519,8 +557,15 @@ def main():
     print(f"\n  Matching commits to plan...")
     matched, unmatched = match_commits_to_plan(commits, plans, projects)
 
+    print(f"\n  Checking novel activity...")
+    novel_files = check_novel_activity(date_str)
+    if novel_files:
+        print(f"  소설 집필 감지: {len(novel_files)}개 파일 수정됨")
+    else:
+        print(f"  소설 집필 없음")
+
     print(f"\n  Generating journal...")
-    content = generate_journal(date_str, commits, matched, unmatched, phase)
+    content = generate_journal(date_str, commits, matched, unmatched, phase, novel_files)
     save_journal(date_str, content)
 
     print(f"\n  Pushing to Git...")
