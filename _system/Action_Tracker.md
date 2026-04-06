@@ -20,7 +20,8 @@
 
 | 할 일 | 프로젝트 | 메모 |
 |-------|---------|------|
-| 블렌더 학습 시작 | 버튜버외주 | Phase 3 시작 시 (2026.04) |
+| **4월 진행 현황 보고 + 계획 피드백** | System | 2026-04-30, 60_Journal 기반으로 실적 분석 요청 |
+| 블렌더 학습 시작 | 버튜버외주 | 시간 여유 생기면 |
 | Claude Desktop MCP 설정 | System | Windows에서 직접: claude_desktop_config.json 편집 |
 | Claude Desktop Custom Instruction 입력 | System | 설정 > Custom Instructions |
 | AI Brain 시스템 3주 후 효과 평가 | System | 2026-04-15 재검토 |
