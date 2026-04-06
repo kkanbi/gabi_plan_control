@@ -321,24 +321,47 @@ def collect_all_commits(date_str):
 
 def check_novel_activity(date_str):
     """
-    NOVEL_PATH 폴더에서 해당 날짜에 수정된 파일 목록 반환.
-    폴더가 없으면 빈 리스트.
+    NOVEL_PATH 폴더의 JSON 소설 파일에서 오늘 수정된 에피소드와 글자 수 반환.
+    폴더가 없으면 빈 결과.
     """
     if not NOVEL_PATH.exists():
         print(f"  [SKIP] 소설 폴더 없음: {NOVEL_PATH}")
-        return []
+        return {"modified": False, "episodes": [], "total_chars": 0}
 
     target = datetime.strptime(date_str, "%Y-%m-%d").date()
-    modified = []
+    result = {"modified": False, "episodes": [], "total_chars": 0}
 
-    for f in NOVEL_PATH.rglob("*"):
-        if not f.is_file():
-            continue
+    for f in NOVEL_PATH.rglob("*.json"):
         mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=KST).date()
-        if mtime == target:
-            modified.append(f.name)
+        if mtime != target:
+            continue
 
-    return modified
+        result["modified"] = True
+        try:
+            import json
+            data = json.loads(f.read_text(encoding="utf-8"))
+            title = data.get("title", f.stem)
+
+            # 에피소드별 오늘 수정 여부 + 글자 수 수집
+            volumes = data.get("volumes", {})
+            for vol_key, vol in volumes.items():
+                for ep in vol.get("episodes", []):
+                    ep_modified = ep.get("lastModified", "")
+                    ep_date = ep_modified[:10] if ep_modified else ""
+                    char_count = ep.get("charCount", 0)
+
+                    if ep_date == date_str and char_count > 0:
+                        result["episodes"].append({
+                            "title": f"{title} {ep.get('number', '?')}화 {ep.get('title', '')}".strip(),
+                            "chars": char_count,
+                        })
+                        result["total_chars"] += char_count
+
+        except Exception as e:
+            print(f"  [WARN] JSON 파싱 실패 ({f.name}): {e}")
+            result["episodes"].append({"title": f.name, "chars": 0})
+
+    return result
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -454,10 +477,15 @@ def generate_journal(date_str, commits, matched, unmatched, phase, novel_files=N
         lines.append("")
 
     lines += ["## 웹소설 집필", ""]
-    if novel_files:
-        lines.append("✅ 오늘 집필함")
-        for fname in novel_files:
-            lines.append(f"- {fname}")
+    novel = novel_files or {}
+    if novel.get("modified"):
+        total = novel.get("total_chars", 0)
+        goal = 5000
+        status = "✅ 목표 달성!" if total >= goal else f"⚠️ {goal - total:,}자 부족"
+        lines.append(f"**오늘 집필량**: {total:,}자 / 목표 {goal:,}자 — {status}")
+        lines.append("")
+        for ep in novel.get("episodes", []):
+            lines.append(f"- {ep['title']}: {ep['chars']:,}자")
     else:
         lines.append("➖ 오늘 집필 없음")
     lines.append("")
@@ -559,8 +587,8 @@ def main():
 
     print(f"\n  Checking novel activity...")
     novel_files = check_novel_activity(date_str)
-    if novel_files:
-        print(f"  소설 집필 감지: {len(novel_files)}개 파일 수정됨")
+    if novel_files.get("modified"):
+        print(f"  소설 집필 감지: {novel_files['total_chars']:,}자")
     else:
         print(f"  소설 집필 없음")
 
