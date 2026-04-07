@@ -5,6 +5,7 @@ platform:
 instructor: 
 status: 진행중
 tags: []
+프로젝트: []
 started: <% tp.date.now("YYYY-MM-DD") %>
 ---
 

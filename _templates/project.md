@@ -16,8 +16,13 @@ deadline:
 - 
 
 ## 관련 학습
-<!-- 20_Learn 노트 링크 -->
-- 
+
+```dataview
+TABLE course AS "강의/자료", tags AS "태그", started AS "날짜"
+FROM "20_Learn"
+WHERE contains(프로젝트, "<% tp.file.title %>")
+SORT started DESC
+```
 
 ## 관련 아이디어
 <!-- 30_Think 노트 링크 -->
