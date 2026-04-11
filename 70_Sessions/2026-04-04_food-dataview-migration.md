@@ -39,17 +39,17 @@ tags: [session, household, food, dataview, obsidian]
 - JSX/React 불필요 — Dataview만으로 충분
 
 ### 선택한 구조
-- 개별 항목 파일 방식: `20_Home/food/*.md` (YAML frontmatter)
+- 개별 항목 파일 방식: `_home/food/*.md` (YAML frontmatter)
 - `household_Food.md`를 Dataview 대시보드로 전환
 
 ### 결과
-- `20_Home/food/` 폴더에 **73개 개별 항목 파일** 생성
+- `_home/food/` 폴더에 **73개 개별 항목 파일** 생성
 - YAML frontmatter 필드: `이름`, `카테고리`, `출처`, `가격`, `가격표시`, `용량`, `건강`, `건강메모`, `상태`, `메모`, `테스트목적`, `구매일`
 - `상태` 값: `확정` / `테스트중` / `탈락` / `애매`
 - 대시보드 쿼리: 카테고리별 테이블, 전체 현황 통계, 테스트중/탈락 자동 집계
 
 ### 새 항목 추가 방법
-`20_Home/food/` 폴더에 아래 형식으로 파일 하나 생성하면 대시보드 자동 반영:
+`_home/food/` 폴더에 아래 형식으로 파일 하나 생성하면 대시보드 자동 반영:
 
 ```yaml
 ---

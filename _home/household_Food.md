@@ -1,7 +1,7 @@
 # 🍳 요리 아이템 기록부
 
 > 마지막 업데이트: 2026-04-04
-> 데이터 위치: `20_Home/food/` 폴더 — 항목 추가·수정은 개별 파일에서
+> 데이터 위치: `_home/food/` 폴더 — 항목 추가·수정은 개별 파일에서
 
 ---
 
@@ -13,7 +13,7 @@ TABLE WITHOUT ID
   length(filter(rows, (r) => r.상태 = "테스트중")) AS "🔄 테스트중",
   length(filter(rows, (r) => r.상태 = "애매")) AS "⚠️ 애매",
   length(filter(rows, (r) => r.상태 = "탈락")) AS "❌ 탈락"
-FROM "20_Home/food"
+FROM "_home/food"
 GROUP BY true
 ```
 
@@ -28,7 +28,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "간편식" AND 상태 = "확정"
 SORT 가격 ASC
 ```
@@ -44,7 +44,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "밀키트" AND 상태 = "확정"
 SORT 가격 ASC
 ```
@@ -61,7 +61,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "재료" AND 상태 = "확정"
 SORT 가격 ASC
 ```
@@ -77,7 +77,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "반찬" AND 상태 = "확정"
 ```
 
@@ -92,7 +92,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "음료" AND 상태 = "확정"
 ```
 
@@ -107,7 +107,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "베이커리" AND 상태 = "확정"
 ```
 
@@ -122,7 +122,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "파스타" AND 상태 = "확정"
 ```
 
@@ -137,7 +137,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "양념" AND 상태 = "확정"
 SORT 가격 ASC
 ```
@@ -153,7 +153,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   건강 AS "건강",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "간식" AND 상태 = "확정"
 SORT 건강 ASC, 가격 ASC
 ```
@@ -168,7 +168,7 @@ TABLE WITHOUT ID
   출처 AS "산 곳",
   가격표시 AS "가격",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 카테고리 = "주방용품" AND 상태 = "확정"
 ```
 
@@ -184,7 +184,7 @@ TABLE WITHOUT ID
   가격표시 AS "가격",
   테스트목적 AS "테스트 목적",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 상태 = "테스트중"
 SORT 카테고리 ASC
 ```
@@ -197,7 +197,7 @@ TABLE WITHOUT ID
   카테고리 AS "카테고리",
   가격표시 AS "가격",
   메모 AS "메모"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 상태 = "애매"
 ```
 
@@ -211,7 +211,7 @@ TABLE WITHOUT ID
   카테고리 AS "카테고리",
   가격표시 AS "가격",
   메모 AS "탈락 이유"
-FROM "20_Home/food"
+FROM "_home/food"
 WHERE 상태 = "탈락"
 ```
 

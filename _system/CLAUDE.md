@@ -43,7 +43,7 @@
 | 세션 요약 | `70_Sessions/YYYY-MM-DD_topic.md` |
 | 작업 메모/업데이트 | `60_Journal/YYYY-MM-DD.md` → `## 메모` 섹션 |
 | 프로젝트 노트 | `40_Projects/[project]/` |
-| 식재료·소모품 기록 | `20_Home/household_Food.md` 또는 `household_supplies.md` |
+| 식재료·소모품 기록 | `_home/household_Food.md` 또는 `_home/household_supplies.md` |
 
 ---
 

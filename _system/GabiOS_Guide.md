@@ -30,7 +30,7 @@ gabi_plan_control/
 │       ├── generate_worklog.py  ← 일지 자동생성 스크립트
 │       ├── run_worklog.bat      ← Task Scheduler 진입점
 │       └── setup_scheduler.ps1 ← Task Scheduler 등록
-├── 20_Home/                  ← 집안 관리 (식재료, 소모품)
+├── _home/                    ← 집안 관리 (식재료, 소모품)
 ├── 40_Projects/              ← 프로젝트 노트
 ├── 50_Strategy/              ← 전략 문서 (타임라인, 목표)
 │   └── 2026_ProjectTimeline.md ← ⭐ 프로젝트 일정 원본 (스크립트가 읽음)
