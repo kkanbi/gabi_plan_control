@@ -5,7 +5,7 @@ Gabi Brain - Daily Work Log Generator
 매일 밤 실행: GitHub 커밋 수집 → 마스터 플랜 매칭 → 옵시디언 일지 자동 생성
 
 프로젝트 일정/페이즈는 50_Strategy/2026_ProjectTimeline.md 에서 자동으로 읽음.
-하드코딩 없이 마크다운 파일만 수정하면 반영됨.
+기본 동작은 로컬 저널 생성만 수행하며, Git 동기화는 명시적으로 켠 경우에만 실행됨.
 
 사용법:
   python generate_worklog.py              # 오늘 날짜 기준
@@ -38,6 +38,7 @@ JOURNAL_DIR  = VAULT_PATH / "60_Journal"
 TIMELINE_PATH = VAULT_PATH / "50_Strategy" / "2026_ProjectTimeline.md"
 
 KST = timezone(timedelta(hours=9))
+ENABLE_GIT_SYNC = os.environ.get("WORKLOG_GIT_SYNC", "").lower() in {"1", "true", "yes", "on"}
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -460,14 +461,15 @@ def save_journal(date_str, content):
     return filepath
 
 
-def git_commit_and_push(date_str):
+def git_commit_and_push(filepath, date_str):
+    relative_path = filepath.relative_to(VAULT_PATH).as_posix()
     try:
         os.chdir(VAULT_PATH)
         subprocess.run(["git", "pull", "--rebase"], capture_output=True, timeout=30)
-        subprocess.run(["git", "add", "."],         check=True, capture_output=True, timeout=30)
+        subprocess.run(["git", "add", relative_path], check=True, capture_output=True, timeout=30)
 
         result = subprocess.run(
-            ["git", "status", "--porcelain"],
+            ["git", "status", "--porcelain", "--", relative_path],
             capture_output=True, text=True, timeout=10
         )
         if result.stdout.strip():
@@ -478,7 +480,7 @@ def git_commit_and_push(date_str):
             subprocess.run(["git", "push"], check=True, capture_output=True, timeout=60)
             print("  Git push complete")
         else:
-            print("  No changes to commit")
+            print("  No journal changes to commit")
     except Exception as e:
         print(f"  [WARN] Git error: {e}")
 
@@ -521,10 +523,13 @@ def main():
 
     print(f"\n  Generating journal...")
     content = generate_journal(date_str, commits, matched, unmatched, phase)
-    save_journal(date_str, content)
+    filepath = save_journal(date_str, content)
 
-    print(f"\n  Pushing to Git...")
-    git_commit_and_push(date_str)
+    if ENABLE_GIT_SYNC:
+        print(f"\n  Pushing journal to Git...")
+        git_commit_and_push(filepath, date_str)
+    else:
+        print("\n  Git sync skipped (set WORKLOG_GIT_SYNC=1 to enable)")
 
     total_commits = sum(len(v) for v in commits.values())
     matched_count = sum(1 for m in matched if m["commits"])

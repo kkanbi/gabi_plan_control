@@ -18,7 +18,7 @@ TABLE
   total_commits AS "커밋 수",
   plan_progress AS "계획 진행"
 FROM "60_Journal"
-WHERE type = "work-log"
+WHERE type = "journal"
 SORT date DESC
 LIMIT 14
 ```
@@ -33,7 +33,7 @@ TABLE
   total_commits AS "커밋",
   plan_progress AS "진행률"
 FROM "60_Journal"
-WHERE type = "work-log" AND date >= date(today) - dur(7 days)
+WHERE type = "journal" AND date >= date(today) - dur(7 days)
 SORT date DESC
 ```
 
@@ -56,9 +56,9 @@ SORT file.mtime DESC
 
 | 문서 | 역할 |
 |------|------|
-| [[_system/Memory\|🧠 Memory]] | 세션 시작 필독 — 현재 상태 총정리 |
-| [[_system/Action_Tracker\|✅ Action Tracker]] | 진행 중 할 일 + 데드라인 |
-| [[_system/Decision_Log\|🗂️ Decision Log]] | 결정 이력 (왜 그렇게 했는지) |
+| [[_system/Memory|🧠 Memory]] | 세션 시작 필독 — 현재 상태 총정리 |
+| [[_system/Action_Tracker|✅ Action Tracker]] | 진행 중 할 일 + 데드라인 |
+| [[_system/Decision_Log|🗂️ Decision Log]] | 결정 이력 (왜 그렇게 했는지) |
 
 ## 📝 최근 세션
 
@@ -75,10 +75,10 @@ LIMIT 5
 
 | 문서 | 설명 |
 |------|------|
-| [[50_Strategy/2026_ProjectTimeline\|📊 프로젝트 타임라인]] | Gantt 차트 + 수익 계획 (Mermaid) |
-| [[50_Strategy/2026_ProjectTimeline\|🎨 HTML 원본 타임라인]] | 색상/애니메이션 포함 HTML 뷰 |
-| [[50_Strategy/2026_Goal\|🎯 2026 라이프 아키텍처]] | 만다라트 + 분기별 체크리스트 (HTML) |
-| [[50_Strategy/freelancer_strategy_v2\|📝 프리랜서 전략 v2]] | 마스터 전략 문서 |
+| [[50_Strategy/2026_ProjectTimeline|📊 프로젝트 타임라인 원본]] | 프로젝트 추가와 일정 변경 시 수정하는 유일한 원본 |
+| [🎨 시각화 타임라인](50_Strategy/2026_ProjectTimeline.html) | 보기 전용 시각화 파일 |
+| [[50_Strategy/2026_Goal|🎯 2026 라이프 아키텍처]] | 만다라트 + 분기별 체크리스트 (HTML) |
+| [[50_Strategy/freelancer_strategy_v2|📝 프리랜서 전략 v2]] | 이전 장기 전략 문서 (참고용) |
 
 ---
 
@@ -89,7 +89,7 @@ TABLE
   length(rows) AS "작업일 수",
   sum(rows.total_commits) AS "총 커밋"
 FROM "60_Journal"
-WHERE type = "work-log"
+WHERE type = "journal"
 GROUP BY dateformat(date, "yyyy-MM") AS "월"
 SORT rows.date DESC
 LIMIT 6
