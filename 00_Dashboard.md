@@ -77,8 +77,9 @@ LIMIT 5
 |------|------|
 | [[50_Strategy/2026_ProjectTimeline|📊 프로젝트 타임라인 원본]] | 프로젝트 추가와 일정 변경 시 수정하는 유일한 원본 |
 | [🎨 시각화 타임라인](50_Strategy/2026_ProjectTimeline.html) | 보기 전용 시각화 파일 |
+| [🗺️ Vault 구조 인포그래픽](90_Attachments/Vault_Structure_Infographic.html) | 현재 볼트 구조와 프로젝트 추가 순서를 한 장으로 정리한 안내 |
 | [[50_Strategy/2026_Goal|🎯 2026 라이프 아키텍처]] | 만다라트 + 분기별 체크리스트 (HTML) |
-| [[50_Strategy/freelancer_strategy_v2|📝 프리랜서 전략 v2]] | 이전 장기 전략 문서 (참고용) |
+| [[80_Archive/strategy_legacy/freelancer_strategy_v2_legacy|📝 이전 프리랜서 전략]] | 예전 장기 전략 아카이브 |
 
 ---
 

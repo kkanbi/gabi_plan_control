@@ -42,7 +42,7 @@
 | 새 할 일 / 다음 액션 | `_system/Action_Tracker.md` |
 | 세션 요약 | `70_Sessions/YYYY-MM-DD_topic.md` |
 | 작업 메모/업데이트 | `60_Journal/YYYY-MM-DD.md` → `## 메모` 섹션 |
-| 프로젝트 노트 | `40_Projects/[project]/` |
+| 프로젝트 노트 | `40_Projects/[status]/[project]/` |
 | 식재료·소모품 기록 | `20_Home/household_Food.md` 또는 `household_supplies.md` |
 
 ---
@@ -91,9 +91,9 @@ repo-root/
 
 ## 🎯 현재 진행 중인 프로젝트 (최신 순)
 
-1. **웹소설 어시스턴트** — 진행 중 🔄
-2. **인스타툰 자동생성기** — 진행 중 🔄
-3. **뽀모도로 RPG 앱 (Flutter)** — 위 둘 완료 후 재개 ⏸️
+1. **베이비트래커** — 현재 최우선 진행 🔄
+2. **복직 준비** — 2026.11부터 예정 📚
+3. **Pomory** — 복직 후 재검토 ⏸️
 
 ---
 

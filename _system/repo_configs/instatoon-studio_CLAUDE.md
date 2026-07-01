@@ -22,7 +22,7 @@
 | 중요 결정 | `D:\2027_Git\gabi_plan_control\_system\Decision_Log.md` |
 | 새 할 일 | `D:\2027_Git\gabi_plan_control\_system\Action_Tracker.md` |
 | 세션 요약 | `D:\2027_Git\gabi_plan_control\70_Sessions\YYYY-MM-DD_instatoon.md` |
-| 프로젝트 노트 | `D:\2027_Git\gabi_plan_control\40_Projects\인스타툰자동생성기\` |
+| 프로젝트 노트 | `D:\2027_Git\gabi_plan_control\40_Projects\20_Backlog\인스타툰자동생성기\` |
 
 ---
 

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabi Plan Control - Vault Structure Infographic</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --paper: #fffaf2;
+      --ink: #2b2b2b;
+      --muted: #6f6a63;
+      --line: #d8ccb8;
+      --accent: #d76c4a;
+      --accent-2: #3f7c85;
+      --accent-3: #d1a13d;
+      --accent-4: #6f8f5b;
+      --shadow: 0 18px 40px rgba(84, 64, 41, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(215, 108, 74, 0.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(63, 124, 133, 0.16), transparent 22%),
+        linear-gradient(180deg, #f8f3ea 0%, #f2eadf 100%);
+      color: var(--ink);
+    }
+
+    .page {
+      width: min(1400px, calc(100vw - 40px));
+      margin: 24px auto;
+      background: var(--paper);
+      border: 1px solid rgba(111, 106, 99, 0.12);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 40px 44px 26px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(215, 108, 74, 0.1), transparent 45%),
+        linear-gradient(225deg, rgba(63, 124, 133, 0.1), transparent 42%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(215, 108, 74, 0.12);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.08;
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      padding: 28px;
+    }
+
+    .column {
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .folder {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      min-height: 122px;
+    }
+
+    .folder strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .folder span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .warm { background: rgba(215, 108, 74, 0.10); }
+    .cool { background: rgba(63, 124, 133, 0.10); }
+    .gold { background: rgba(209, 161, 61, 0.12); }
+    .green { background: rgba(111, 143, 91, 0.12); }
+
+    .projects {
+      display: grid;
+      gap: 12px;
+    }
+
+    .lane {
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fffdf8;
+    }
+
+    .lane strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .lane span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+    }
+
+    .num {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+      background: var(--accent);
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .step span {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .rule-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .rule {
+      padding: 12px 14px;
+      border-left: 4px solid var(--accent-2);
+      background: rgba(63, 124, 133, 0.08);
+      border-radius: 0 14px 14px 0;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tiny {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 0 28px 28px;
+    }
+
+    .summary {
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(215, 108, 74, 0.1), rgba(63, 124, 133, 0.1));
+      border: 1px solid var(--line);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(43, 43, 43, 0.06);
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 1100px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: calc(100vw - 20px);
+        margin: 10px auto;
+        border-radius: 20px;
+      }
+
+      .hero {
+        padding: 28px 20px 22px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .content,
+      .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">One-Page Guide</div>
+      <h1>옵시디언 볼트 구조,<br />이 한 장만 보면 되는 버전</h1>
+      <p class="subtitle">
+        이 볼트는 자료를 쌓는 곳이 아니라 <strong>지금 할 일과 나중에 볼 것</strong>을 구분해서 움직이기 쉽게 만든 작업 공간입니다.
+        헷갈릴 때는 아래 세 가지만 기억하면 됩니다:
+        <strong>일정은 한 파일만 수정</strong>, <strong>프로젝트는 상태별로 넣기</strong>, <strong>오래된 건 아카이브로 보내기</strong>.
+      </p>
+    </section>
+
+    <section class="content">
+      <div class="column">
+        <article class="card">
+          <h2>1. 폴더는 이렇게 나뉨</h2>
+          <div class="grid">
+            <div class="folder warm">
+              <strong>00_Inbox</strong>
+              <span>일단 던지는 곳. 아직 정리 안 된 메모와 임시 노트.</span>
+            </div>
+            <div class="folder cool">
+              <strong>10_Capture / 20_Learn / 30_Think</strong>
+              <span>자료 저장, 공부 정리, 내 생각 정리를 분리하는 구역.</span>
+            </div>
+            <div class="folder gold">
+              <strong>40_Projects</strong>
+              <span>실제 프로젝트를 상태별로 관리하는 핵심 폴더.</span>
+            </div>
+            <div class="folder green">
+              <strong>50_Strategy / 60_Journal / 70_Sessions</strong>
+              <span>계획, 작업일지, AI 세션 기록이 모이는 운영 구역.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>2. 프로젝트 폴더는 이제 3갈래만 보면 됨</h2>
+          <div class="projects">
+            <div class="lane">
+              <strong>10_Active</strong>
+              <span>지금 실제로 밀고 있는 프로젝트. 예: <code>베이비트래커</code></span>
+            </div>
+            <div class="lane">
+              <strong>20_Backlog</strong>
+              <span>보류했지만 버리지 않은 프로젝트. 예: <code>Pomory</code>, <code>버튜버외주</code>, <code>인스타툰자동생성기</code></span>
+            </div>
+            <div class="lane">
+              <strong>30_Writing</strong>
+              <span>앱/툴보다는 글쓰기 중심 프로젝트. 예: <code>글쓰기어시스턴트</code></span>
+            </div>
+          </div>
+          <div class="tiny">규칙: 새 프로젝트를 만들 때는 프로젝트 이름보다 먼저 상태를 정합니다.</div>
+        </article>
+
+        <article class="card">
+          <h2>3. 새 프로젝트 추가할 때 순서</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <strong>일정 먼저 추가</strong>
+                <span><code>50_Strategy/2026_ProjectTimeline.md</code>에 프로젝트와 스케줄을 넣습니다. 이 파일이 원본입니다.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <strong>상태 폴더 선택</strong>
+                <span><code>40_Projects/10_Active</code>, <code>20_Backlog</code>, <code>30_Writing</code> 중 한 곳에 프로젝트 폴더를 만듭니다.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <strong>설명 노트만 붙이기</strong>
+                <span>필요하면 README나 작업 노트를 넣습니다. 처음부터 문서를 많이 만들 필요는 없습니다.</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">4</div>
+              <div>
+                <strong>시각화는 나중</strong>
+                <span><code>2026_ProjectTimeline.html</code>은 보기용 시각화라서, 원본 수정이 끝난 뒤 필요할 때만 맞추면 됩니다.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="column">
+        <article class="card">
+          <h2>4. 헷갈리지 않으려면 이것만 기억</h2>
+          <div class="rule-list">
+            <div class="rule"><strong>수정 원본은 1개</strong><br />일정과 프로젝트 추가는 항상 <code>2026_ProjectTimeline.md</code>부터 합니다.</div>
+            <div class="rule"><strong>시각화는 보기 전용</strong><br /><code>2026_ProjectTimeline.html</code>은 발표용, 확인용입니다. 기준 파일이 아닙니다.</div>
+            <div class="rule"><strong>죽은 문서는 삭제보다 아카이브</strong><br />지금 안 쓰는 문서는 <code>80_Archive</code>나 <code>_system/_archive</code>로 보내서 동선에서 치웁니다.</div>
+            <div class="rule"><strong>시스템 문서는 _system</strong><br />현재 쓰는 운영 문서만 두고, 예전 가이드는 아카이브로 보냅니다.</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>5. 지금 실제 기준 파일</h2>
+          <div class="rule-list">
+            <div class="rule"><code>00_Dashboard.md</code><br />전체 진입점</div>
+            <div class="rule"><code>40_Projects/README.md</code><br />프로젝트 폴더 사용 규칙</div>
+            <div class="rule"><code>_system/README.md</code><br />시스템 문서 안내</div>
+            <div class="rule"><code>_system/SETUP_GUIDE.md</code><br />자동화와 작업일지 설명</div>
+            <div class="rule"><code>50_Strategy/2026_ProjectTimeline.md</code><br />일정 원본</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>6. 한 줄 요약</h2>
+          <p>
+            뭔가 새로 시작할 때는 <strong>전략 파일에 일정 추가</strong> →
+            <strong>프로젝트 폴더 생성</strong> →
+            <strong>필요한 노트만 최소한으로 추가</strong>.
+            예전 문서가 보이면 삭제 고민보다 먼저 아카이브로 옮기면 됩니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="summary">
+        <strong>기억할 핵심:</strong> 이 볼트는 “문서를 많이 만드는 시스템”이 아니라
+        “지금 하는 것과 나중에 볼 것을 쉽게 구분하는 시스템”입니다.
+        그래서 새 작업이 생기면 먼저 <code>50_Strategy/2026_ProjectTimeline.md</code>를 고치고,
+        프로젝트는 <code>40_Projects</code> 안에서 상태별로만 배치하면 거의 안 꼬입니다.
+      </div>
+    </section>
+  </main>
+</body>
+</html>

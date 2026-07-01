@@ -22,7 +22,7 @@
 | 중요 결정 | `D:\2027_Git\gabi_plan_control\_system\Decision_Log.md` |
 | 새 할 일 | `D:\2027_Git\gabi_plan_control\_system\Action_Tracker.md` |
 | 세션 요약 | `D:\2027_Git\gabi_plan_control\70_Sessions\YYYY-MM-DD_pomory.md` |
-| 프로젝트 노트 | `D:\2027_Git\gabi_plan_control\40_Projects\앱개발\` |
+| 프로젝트 노트 | `D:\2027_Git\gabi_plan_control\40_Projects\20_Backlog\Pomory\` |
 
 ---
 
@@ -48,7 +48,7 @@
 - **로컬 경로**: `D:\2027_Git\Pomory`
 - **연결된 vault**: `D:\2027_Git\gabi_plan_control`
 - **목표**: 뽀모도로 RPG 앱 (Flutter + Hive)
-- **상태**: ⏸️ 일시정지 (2026-04 재개 예정)
+- **상태**: ⏸️ 백로그 (복직 후 재검토)
 
 ---
 

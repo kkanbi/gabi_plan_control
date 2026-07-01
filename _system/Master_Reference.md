@@ -72,7 +72,7 @@
 
 | 파일 | 역할 | 상태 |
 |------|------|------|
-| `_system/scripts/generate_worklog.py` | 60_Journal에 날짜별 작업일지 자동 생성 | 정리 필요 |
+| `_system/scripts/generate_worklog.py` | 60_Journal에 날짜별 작업일지 자동 생성 | 기본 정리 완료 |
 | `_system/scripts/setup_all_repos.ps1` | 여러 레포 git 세팅 | 구축 완료 |
 | `_system/scripts/setup_scheduler.ps1` | Windows 작업 스케줄러 등록 | 구축 완료 |
 | obsidian-git 플러그인 | Vault 자동 백업 (커밋) | 활성 |
